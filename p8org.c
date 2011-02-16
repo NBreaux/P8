@@ -143,11 +143,42 @@ void initparse( void )
 }
 
 
-void initscan( void )
+void initscan( void )// By Miguel - 2/16 @ 12:10 PM  added initscan function.
 {
 	int hash( char * );
 
 	int h,i;
+	
+	ch = NEWL;
+	line = nerr = nilit = nivar = nrlit = nvar = nsymb = 0;
+	hash = (HASHREC *)malloc( HSIZE*sizeof( HASHREC));
+	
+	if( hashp == (HASHREC *)NULL )
+	{
+		puts( "** can't allocate hash table **" );
+		exit( 1 );
+	}
+	
+	ssp = (char *)malloc( SSIZE );
+	
+	if( ssp == (char *)NULL )
+	{
+		puts( "** can't allocate string space **");
+		exit( 1 );
+	}
+	
+	ssp1 = ssp+SSIZE;
+	for(i = 0; i < HSIZE; i++)
+	{
+		hashp[i].ptss = (char *)NULL;
+	}
+	
+	for( i = 0; i < sizeof( trw )/sizeof( char *); i++)
+	{
+		h = -(hash( trw[i] + 1));
+		hashp[h].ptss = trw[i];
+		hashp[h].icod = 300 + i;
+	}
 }
 
 void intstr( char *t )// By Miguel - 02/16 @04:23 am - I know im up late again :P
