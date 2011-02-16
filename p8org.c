@@ -5,8 +5,7 @@
 
 #include "p8.h"
 
-int
-main( int argc,char **argv )
+int main( int argc,char **argv )
 {
 	void parse( void ),scan( void );
 
@@ -36,74 +35,85 @@ main( int argc,char **argv )
 	}
 	return( 0 );
 }
-long double
-atold( char *a )
+
+long double atold( char *a )
 {
 	long double tento( int );
 
 	long double y;
 	int n,p,s;
 }
-void
-baddigitstr( char *t )
+
+void baddigitstr( char *t )
 {
+	fprintf( fpe, e2, line,t );
+	nerr++;
+	lsymb = symbol[nsymb++] = 0; 
 }
-void
-closeout( void )
+
+void closeout( void )
 {
 	void makename( char *,char *,char * );
 
 	int i;
 	char fasm[13];
 }
-int
-comp( int s,int *p )
+
+int comp( int s,int *p )
 {
 }    
-void
-delimiter( void )
+
+void delimiter( void )
+{
+	lsymb = symbol[nsymb++] = 350+(int)delim[(int)ch & 0x00ff];
+	if( ch == ';')
+	{
+		lrw = 0;
+	}
+}
+
+void emit0( int n )
 {
 }
-void
-emit0( int n )
+
+void emit1( int i )
 {
 }
-void
-emit1( int i )
-{
-}
-void
-emit2( int i,int j )
+
+void emit2( int i,int j )
 {
 	void emit0( int );
 }
-void
-emit3( int i,int j,int k )
+
+void emit3( int i,int j,int k )
 {
 	void emit0( int );
 }
-void
-extradot( int d,char *t )
+
+void extradot( int d,char *t )
 {
+	fprintf( fpe,e0,line,d,t );
+	nerr++;
+	lsymb = symbol[nsymb++] = 0;
 }
-void
-floatstr( char *t )
+
+void floatstr( char *t )
 {
 	long double atold( char * );
 
 	double x;
 	int i;
 }
-void
-gencode( void )
+
+void gencode( void )
 {
 	int nextr( void );
 	void emit1( int ),emit2( int,int ),emit3( int,int,int );
 
 	int l,r;
 }
-void
-getsymbol( void )
+
+void getsymbol( void )
 {
 }
 //
@@ -113,57 +123,77 @@ getsymbol( void )
 //		if return value y < 0, then hash = -(y+1)
 //				       else hash = y.
 //
-int
-hash( char *s )
+
+int hash( char *s )
 {
 	int h,q;
 	char *p;
 }
-void
-illegalch( void )
+
+void illegalch( void )
 {
+	fprintf( fpe,e1,line,ch );
+	nerr++;
+	lsymb = symbol[nsymb++] = 0;
 }
-void
-initparse( void )
+
+void initparse( void )
 {
 	int r;
 }
 
 
-void
-initscan( void )
+void initscan( void )
 {
 	int hash( char * );
 
 	int h,i;
 }
-void
-intstr( char *t )
+
+void intstr( char *t )// By Miguel - 02/16 @04:23 am - I know im up late again :P
 {
 	long atol( char * );
 
 	long x;
 	int i;
+	// from flowchart: for some reason I dont see another mention of " nilit " on page 103
+	x = atol( t );
+	for(i = 0; i < nilit; i++)
+	{
+		if( x == ilit[i] )
+		{
+			return lsymb = symbol[nsymb++] = 250 + i;//flow chart says return not sure if its meant to be like this or something else..
+		}
+	}
+	
+	if( 50 <= nilit )
+	{
+		puts( "** too many int literals **" );
+		exit(1);
+	}
+	
+	ilit[nilit++] = x;
+	lsymb = symbol[nsymb++] = 249 + nilit;
 }
-void
-letterstr( char *t )
+
+void letterstr( char *t )
 {
 	int hash( char * );
 
 	int h,i;
 	char *p;
 }
-void
-makename( char *p,char *q,char *r )
+
+void makename( char *p,char *q,char *r )
 {
 }
-void
-match( void )
+
+void match( void )
 {
 	void gencode( void );
 }
-int
-nextr( void )
+
+int nextr( void )
 {
 	int r;
 }
@@ -179,52 +209,46 @@ nextr( void )
 //		6 : real
 //	  7,8,... : too many dots (st-5 dots)
 //
-int
-nexts( char *s,char *t )
+
+int nexts( char *s,char *t )
 {
 	int ch2,e,st;
 	static char *p;
 }
-void
-ouch( int c )
+
+void ouch( int c )
 {
 	putchar( c );
 }
 
-
-
-
-
-
-void
-outscan( void )
+void outscan( void )
 {
 	void makename( char *,char *,char * ),ouch( int );
 
 	int c,i,j,k;
 	char fsym[13];
 }
-void
-parse( void )
+
+void parse( void )
 {
 	void closeout( void ),getsymbol( void ),initparse( void ),
 		reduce( void ),reportbug( void ),shift( void );
 }
-void
-reduce( void )
+
+void reduce( void )
 {
 	int comp( int,int * );
 	void match( void );
 }
-void
-reportbug( void )
+
+void reportbug( void )
 {
 	void ouch( int );
 
 	int i,j,k;
 }
-void
-scan( void )
+
+void scan( void )
 {
 	int nexts( char *,char * );
 	void baddigitstr( char * ),delimiter( void ),extradot( int,char * ),
@@ -234,12 +258,12 @@ scan( void )
 	int st;
 	char s[MAXL+1],t[MAXL+1];
 }
-void
-shift( void )
+
+void shift( void )
 {
 }
-long double
-tento( int n )
+
+long double tento( int n )
 {
 	long double y,z;
 }
