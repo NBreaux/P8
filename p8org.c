@@ -231,7 +231,7 @@ int nextr( void )
 //
 //	st is as follows:
 //	      -st : last symbol in string (here 0 < st)
-//		0 : empty string (last, following a terminal delimiter)
+//		0 : empty string (last, following a terminal fter)
 //		1 : illegal char
 //		2 : delimiter
 //		3 : letterstring (possibly containing digits)
