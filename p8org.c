@@ -245,6 +245,121 @@ int nexts( char *s,char *t )
 {
 	int ch2,e,st;
 	static char *p;
+	//e=0; st=0;
+	//if (ch == NEWL){
+	//	p=s;}
+	//while (l) // that's and L
+	//{
+
+	//	switch(ch2)
+	//	{
+	//		case 0x2f2f: ch = NEWL; break;		// "//" also we may need to define NEWL somewhere
+	//		case 0x3c3d: ch = (char)128; break; // "<="
+	//		case 0x3d3d: ch = (char)129; break; // "=="
+	//		case 0x213d: ch = (char)130; break; // "!="
+	//	//	case 0x3e3d: ch = (char)131; break; // ">=" for p8'
+	//		default:		
+	//			switch( (int)kind[(int)ch & 0x00ff])
+	//			{
+	//				case 0: 
+	//					*t = EOS; 
+	//					return (-st);
+	//				case 1:
+	//					if (st == 0)
+	//							st = 3;
+	//					if (((ch == 'e')||(ch == 'E'))&&((st == 5)||(st==6))&&(e==0))
+	//					{
+	//						st =6;
+	//						e++;
+	//					}
+	//					else
+	//					{
+	//						if (4 < st)
+	//							st = 4;
+	//					}
+	//				case 2:
+	//					if (st==0)
+	//					{
+	//						st=5;
+	//					}
+	//					p++; 
+	//					*t++=ch;
+	//					break;
+	//				case 3:
+	//					if (st==0)
+	//					{
+	//						*t++=ch;
+	//						p++;
+	//						if ((ch=='-')&&isdigit(*p) && ((lsymb==303)||(lsymb ==352)||(lsymb==354)||
+	//							((358<lsymb)&&(lsymb<364))))//364 may need to be modified for p8'
+	//						{
+	//							st = 5;
+	//							break;
+	//						}
+	//						else
+	//						{
+	//							*t=EOS;
+	//							return (2);
+	//						}
+	//					}
+	//					else
+	//					{
+	//						if(st==3)
+	//						{
+	//							*t=EOS;
+	//							return(3);
+	//						}
+	//						else
+	//						{
+	//							if((ch=='-')&&((*(t-1)=='e')||(*(t-1)=='E')))
+	//							{
+	//								p++;
+	//								*t++=ch;
+	//								break;
+	//							}
+	//							else
+	//							{
+	//								if(ch=='.')
+	//								{
+	//									*t++=ch;
+	//									p++;
+	//									if(4 < st)
+	//									{
+	//										st++;
+	//									}
+	//									break;
+	//								}
+	//								else
+	//								{
+	//									*t=EOS;
+	//									return (st);
+	//								}
+	//							}
+	//						}
+	//					}
+	//				case 4:
+	//					p++;
+	//					if(st)
+	//					{
+	//						*t=EOS;
+	//						return(st);
+	//					}
+	//					else
+	//						break;
+	//				case 5:
+	//					if (st == 0)
+	//					{
+	//						p++;
+	//						return(l);
+	//					}
+	//					else
+	//					{
+	//						*t=EOS;
+	//						return(st);
+	//					}
+	//			}
+	//	}
+	//}
 }
 
 void ouch( int c )
