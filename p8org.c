@@ -259,24 +259,28 @@ void intstr( char *t )// By Miguel - 02/16 @04:23 am - I know im up late again :
 
 	long x;
 	int i;
-	// from flowchart: for some reason I dont see another mention of " nilit " on page 103
+
 	x = atol( t );
 	for(i = 0; i < nilit; i++)
 	{
 		if( x == ilit[i] )
 		{
-			return lsymb = symbol[nsymb++] = 250 + i;//flow chart says return not sure if its meant to be like this or something else..
+			lsymb = symbol[nsymb++] = 250 + i;
+			return;
 		}
 	}
-	
-	if( 50 <= nilit )
-	{
-		puts( "** too many int literals **" );
-		exit(1);
+	else{
+		if( 50 <= nilit )
+		{
+			puts( "** too many int literals **" );
+			exit(1);
+		}
+	  else
+		{
+			ilit[nilit++] = x;
+			lsymb = symbol[nsymb++] = 249 + nilit;
+		}
 	}
-	
-	ilit[nilit++] = x;
-	lsymb = symbol[nsymb++] = 249 + nilit;
 }
 
 void letterstr( char *t )

@@ -22,12 +22,7 @@ DONE:
 		floatstr( char *t) - pg 99 done by Danny checked by Miguel
 		delimiter ( void ) - pg 97
 		baddigitstr( char *t) - pg 96
+		intstr( char *t) - pg 103  done by Miguel, checked by Miguel
 
 Functions that have been implemented but need to be double checked		
 CHECK:
-	   
-		intstr( char *t) - pg 103 // Please check implementation of the return statement on line 196 of the source.
-		
-		
-		
-		
