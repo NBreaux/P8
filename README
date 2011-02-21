@@ -14,18 +14,20 @@ TODO:
 		tento (int n) - pg 113
 
 DONE:   
-		atold( char *a ) - pg 95  Miguel: looks good Danny .
+		nexts ( char *s, char *t) - pg 106-108 done by Danny checked by Miguel
+		atold( char *a ) - pg 95  done by Danny checked by Miguel
 		initscan( void )  - pg 102 
 		illegalch( void ) - pg 101
 		extradot ( int d, char *t) pg 98
+		floatstr( char *t) - pg 99 done by Danny checked by Miguel
 		delimiter ( void ) - pg 97
 		baddigitstr( char *t) - pg 96
 
 Functions that have been implemented but need to be double checked		
 CHECK:
-		floatstr( char *t) - pg 99
+	   
 		intstr( char *t) - pg 103 // Please check implementation of the return statement on line 196 of the source.
-		nexts ( char *s, char *t) - pg 106-108
+		
 		
 		
 		
