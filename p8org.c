@@ -143,34 +143,38 @@ void floatstr( char *t )
 
 	double x;
 	int i;
-	//if(!isdigit(*(t+strlen(t)-1)))
-	//{
-	//	fprintf(fpe,e2,line,t);
-	//	nerr++;
-	//	lsymb=symbol[nsymb++]=0;
-	//	return;
-	//}
-	//x=atold(t);
-
-	//for(i=0; i <nrlit; i++)
-	//{
-	//	if(x==rlit[i];)
-	//	{
-	//		lsymb=symbol[nsymb++]=200+i;
-	//		return;
-	//	}
-	//	//else//I dont know if I need the else here but it looks like I may
-	//}
-	//if(50<=nrlit)
-	//{
-	//	puts("** too many real literals **");
-	//		exit(1);
-	//}
-	//else
-	//{
-	//	rlit[nrlit++] = x;
-	//	lsymb=symbol[nsymb++]=199+nrlit;
-	//}
+	
+	if(!isdigit(*(t+strlen(t)-1)))
+	{
+		fprintf(fpe,e2,line,t);
+		nerr++;
+		lsymb = symbol[nsymb++]= 0;
+		return;
+	}
+	
+	x=atold(t);
+	for(i=0; i < nrlit; i++)
+	{
+		if(x==rlit[i];)
+		{
+			lsymb = symbol[nsymb++] = 200+i;
+			return;
+		}
+	}
+		/* the else wasn't necessary - Miguel  */
+		/* If i isnt less then nrlit then it'll go to the if statement below
+			 which will then lead us to the end of the function */
+	//I dont know if I need the else here but it looks like I may - Danny
+	if(50<=nrlit)
+	{
+		puts("** too many real literals **");
+		exit(1);
+	}
+	else
+	{
+		rlit[nrlit++] = x;
+		lsymb=symbol[nsymb++]=199+nrlit;
+	}
 }
 
 void gencode( void )
@@ -313,121 +317,134 @@ int nexts( char *s,char *t )
 {
 	int ch2,e,st;
 	static char *p;
-	//e=0; st=0;
-	//if (ch == NEWL){
-	//	p=s;}
-	//while (l) // that's and L
-	//{
+	e = st = 0;
+	
+	if (ch == NEWL){
+		p=s;
+	}
+	while (l) // that's and L
+	{
+       /* forgot this */
+		ch = *p;
+		ch2 = (((int)ch)<< 8) + ((int)*(p+1));
 
-	//	switch(ch2)
-	//	{
-	//		case 0x2f2f: ch = NEWL; break;		// "//" also we may need to define NEWL somewhere
-	//		case 0x3c3d: ch = (char)128; break; // "<="
-	//		case 0x3d3d: ch = (char)129; break; // "=="
-	//		case 0x213d: ch = (char)130; break; // "!="
-	//	//	case 0x3e3d: ch = (char)131; break; // ">=" for p8'
-	//		default:		
-	//			switch( (int)kind[(int)ch & 0x00ff])
-	//			{
-	//				case 0: 
-	//					*t = EOS; 
-	//					return (-st);
-	//				case 1:
-	//					if (st == 0)
-	//							st = 3;
-	//					if (((ch == 'e')||(ch == 'E'))&&((st == 5)||(st==6))&&(e==0))
-	//					{
-	//						st =6;
-	//						e++;
-	//					}
-	//					else
-	//					{
-	//						if (4 < st)
-	//							st = 4;
-	//					}
-	//				case 2:
-	//					if (st==0)
-	//					{
-	//						st=5;
-	//					}
-	//					p++; 
-	//					*t++=ch;
-	//					break;
-	//				case 3:
-	//					if (st==0)
-	//					{
-	//						*t++=ch;
-	//						p++;
-	//						if ((ch=='-')&&isdigit(*p) && ((lsymb==303)||(lsymb ==352)||(lsymb==354)||
-	//							((358<lsymb)&&(lsymb<364))))//364 may need to be modified for p8'
-	//						{
-	//							st = 5;
-	//							break;
-	//						}
-	//						else
-	//						{
-	//							*t=EOS;
-	//							return (2);
-	//						}
-	//					}
-	//					else
-	//					{
-	//						if(st==3)
-	//						{
-	//							*t=EOS;
-	//							return(3);
-	//						}
-	//						else
-	//						{
-	//							if((ch=='-')&&((*(t-1)=='e')||(*(t-1)=='E')))
-	//							{
-	//								p++;
-	//								*t++=ch;
-	//								break;
-	//							}
-	//							else
-	//							{
-	//								if(ch=='.')
-	//								{
-	//									*t++=ch;
-	//									p++;
-	//									if(4 < st)
-	//									{
-	//										st++;
-	//									}
-	//									break;
-	//								}
-	//								else
-	//								{
-	//									*t=EOS;
-	//									return (st);
-	//								}
-	//							}
-	//						}
-	//					}
-	//				case 4:
-	//					p++;
-	//					if(st)
-	//					{
-	//						*t=EOS;
-	//						return(st);
-	//					}
-	//					else
-	//						break;
-	//				case 5:
-	//					if (st == 0)
-	//					{
-	//						p++;
-	//						return(l);
-	//					}
-	//					else
-	//					{
-	//						*t=EOS;
-	//						return(st);
-	//					}
-	//			}
-	//	}
-	//}
+		switch(ch2)
+		{ 
+			/* Forgot to add p++ to the cases Also it seems that NEWL is defined in p8.h */
+			case 0x2f2f: ch = NEWL; break;		// "//" also we may need to define NEWL somewhere
+			case 0x3c3d: ch = (char)128; p++; break; // "<="
+			case 0x3d3d: ch = (char)129; p++; break; // "=="
+			case 0x213d: ch = (char)130; p++; break; // "!="
+			/* I dont see this on page one anywhere Danny - Miguel */
+			/*case 0x3e3d: ch = (char)131; break; // ">=" for p8'*/
+			default:		
+				switch( (int)kind[(int)ch & 0x00ff])
+				{
+					case 0:	*t = EOS; 
+								 	return (-st);
+
+					case 1:	if (st == 0){
+									st = 3;
+									}
+									
+									if (((ch == 'e')||(ch == 'E')) && ((st == 5) || (st==6)) 
+										&& (e==0))
+									{
+										st =6;
+										e++;
+									}
+ 									
+									else
+									{
+										if (4 < st){
+											st = 4;
+										}
+									}
+
+				 case 2: 	if (st==0)
+								 	{
+										st=5;
+									}
+									p++; 
+									*t++=ch;
+ 									break;
+
+				 case 3: 	if (st==0)
+ 									{
+										*t++=ch;
+ 										p++;
+                    //364 may need to be modified for p8'
+										if ((ch=='-')&&isdigit(*p) && ((lsymb==303)||(lsymb ==352)||(lsymb==354)||
+											((358<lsymb)&&(lsymb<364))))
+										{
+											st = 5;
+											break;
+ 										}
+										else
+ 										{
+											*t=EOS;
+											return (2);
+										}
+									}
+ 									else
+									{
+										if(st==3)
+										{
+											*t=EOS;
+											return(3);
+										}
+										else
+ 										{
+											if((ch=='-')&&((*(t-1)=='e')||(*(t-1)=='E')))
+											{
+												p++;
+												*t++=ch;
+												break;
+											}
+											else
+											{
+ 												if(ch=='.')
+												{
+													*t++=ch;
+													p++;
+													
+													if(4 < st)
+													{
+														st++;
+													}
+													break;
+												}
+												else
+												{
+													*t=EOS;
+													return (st);
+												}
+											}
+										}
+									}
+				 case 4:
+ 								p++;
+								if(st)
+								{
+									*t=EOS;
+									return(st);
+								}
+								else
+									break;
+				 case 5:
+								if (st == 0)
+								{
+									p++;
+									return(l);
+								}
+								else
+								{
+ 									*t=EOS;
+									return(st);
+								}
+			  }
+ 		}
+  }
 }
 
 void ouch( int c )
