@@ -4,9 +4,7 @@ Also I havent quite figured it out yet but if you want to discuss something
 just post it on wave.
                                 
 These are all the functions that need to be implemented into the source
-TODO:   
-		
-		makename( char *p, char *q, char *r) - pg 105
+TODO:   		
 		outscan ( void ) - pg 109-111
 		scan ( void ) - pg 112
 		tento (int n) - pg 113
@@ -26,3 +24,4 @@ Functions that have been implemented but need to be double checked
 CHECK:   
 		letterstr( char *t) - pg 104 by Miguel
 		hash ( char *s) - pg 100 by Miguel
+		makename( char *p, char *q, char *r) - pg 105 by Miguel

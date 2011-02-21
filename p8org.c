@@ -369,6 +369,17 @@ void letterstr( char *t )
 
 void makename( char *p,char *q,char *r )
 {
+	for(; *p && (*p != '.');){
+		*r++ = *p++
+	}
+	
+	*r++ = '.';
+	
+	for(; *q;){
+		*r++ = *q++;
+	}
+	
+	*r = EOS;
 }
 
 void match( void )
