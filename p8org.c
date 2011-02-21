@@ -200,6 +200,26 @@ int hash( char *s )
 {
 	int h,q;
 	char *p;
+	/* I cant remember but can we just leave a for loop without braces? */
+	for( p = s, q = 0; *p; q = q+(int)*p, p++)
+	
+	h = ( q % HSIZE ) - 1;
+	
+	for(q=0;;){
+		if(HSIZE <= ++h){
+			h = 0;
+		}
+		else if( hashp[h].ptss == (char*)NULL){
+			return( -(h+1));
+		}
+		else if( strcmp( s, hashp[h].ptss) == 0){
+			return( h );
+		}
+		else if( HSIZE <= ++q ){
+			puts( "** hash table overflow **");
+			exit(1);
+		}
+	}
 }
 
 void illegalch( void )
