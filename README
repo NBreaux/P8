@@ -9,6 +9,8 @@ TODO:
 		scan ( void ) - pg 112
 		shift ( void ) pg 132 
 		reportbug( void ) pg 131
+		match( void )  pg 127
+		initparse ( void ) pg 126
 		
 		and of course 
 		parse and reduce but i think its given need to look later.
