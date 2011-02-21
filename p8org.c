@@ -289,6 +289,62 @@ void letterstr( char *t )
 
 	int h,i;
 	char *p;
+	
+	h = hash( t );
+	
+	if( 0 <= h){
+		i = hashp[h].icod;
+		if( i == 0 ){
+			fprintf( fpe, e4, line, t );
+			nerr++;
+		}
+	else
+	{
+		if((i < 200) && ((lrw == 300) || (lrw == 301))){
+			fprintf( fpe, e3, line, t );
+			nerr++;
+		}
+		else{
+			if( 300 <= i)
+				lrw = i;
+			else
+				lsymb = symbol[nsymb++] = i;
+		}
+	 }
+	}
+	else{
+		if( ssp1 <= ssp+strlen( t ) ){
+			puts( "** out of string space **" );
+			unlink( "$$err$$");
+			fclose( fps );
+			exit(1);
+		}
+		else{
+			h = -(h + 1);
+			hashp[h].ptss = ssp;
+			p = t;
+			
+			while( (*ssp++ = *p++) != EOS);
+			
+			if( lrw == 300 ){
+				var[nrvar] = hashp[h].ptss;
+				lsymb = symbol[nsymb++] = hashp[h].icod = 100 + (nivar++);
+				return;
+			}
+			else{
+				if( lrw == 301 ){
+					var[50+nivar] = hashp[h].ptss;
+					lsymb = symbol[nsymb++] = hashp[h].icod = 150 + (nivar++);
+					return;
+				}
+				else{
+					fprintf( fpe, e4, line, t);
+					nerr++;
+					lsymb = symbol[nsymb++] = hashp[h].icod = 0;
+				}
+			}
+		}
+	}
 }
 
 void makename( char *p,char *q,char *r )
