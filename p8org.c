@@ -134,6 +134,34 @@ void floatstr( char *t )
 
 	double x;
 	int i;
+	//if(!isdigit(*(t+strlen(t)-1)))
+	//{
+	//	fprintf(fpe,e2,line,t);
+	//	nerr++;
+	//	lsymb=symbol[nsymb++]=0;
+	//	return;
+	//}
+	//x=atold(t);
+
+	//for(i=0; i <nrlit; i++)
+	//{
+	//	if(x==rlit[i];)
+	//	{
+	//		lsymb=symbol[nsymb++]=200+i;
+	//		return;
+	//	}
+	//	//else//I dont know if I need the else here but it looks like I may
+	//}
+	//if(50<=nrlit)
+	//{
+	//	puts("** too many real literals **");
+	//		exit(1);
+	//}
+	//else
+	//{
+	//	rlit[nrlit++] = x;
+	//	lsymb=symbol[nsymb++]=199+nrlit;
+	//}
 }
 
 void gencode( void )
