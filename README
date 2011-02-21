@@ -6,7 +6,6 @@ just post it on wave.
 These are all the functions that need to be implemented into the source
 TODO:   
 		hash ( char *s) - pg 100
-		letterstr( char *t) - pg 104
 		makename( char *p, char *q, char *r) - pg 105
 		outscan ( void ) - pg 109-111
 		scan ( void ) - pg 112
@@ -24,4 +23,4 @@ DONE:
 		intstr( char *t) - pg 103  done by Miguel, checked by Miguel
 
 Functions that have been implemented but need to be double checked		
-CHECK:
+CHECK:   letterstr( char *t) - pg 104 by Miguel
