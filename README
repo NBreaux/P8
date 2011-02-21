@@ -6,7 +6,6 @@ just post it on wave.
 These are all the functions that need to be implemented into the source
 TODO:   
 		hash ( char *s) - pg 100
-		INTSTR( CHAR *t) - pg 103 
 		letterstr( char *t) - pg 104
 		makename( char *p, char *q, char *r) - pg 105
 		outscan ( void ) - pg 109-111
