@@ -7,6 +7,9 @@ These are all the functions that need to be implemented into the source
 TODO:   		
 		outscan ( void ) - pg 109-111
 		scan ( void ) - pg 112
+		
+		It seems that function shift also needs to be included
+		shift ( void ) pg 132
 
 DONE:   
 		nexts ( char *s, char *t) - pg 106-108 done by Danny checked by Miguel
