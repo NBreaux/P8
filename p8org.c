@@ -42,6 +42,37 @@ long double atold( char *a )
 
 	long double y;
 	int n,p,s;
+	//y=(long double)0;
+	//n=0;p=0;s=0;
+	//while ((*a==' ')||(*a=='\t'))// I can't tell if this is a space or just supposed to be nothing ''
+	//{
+	//	a++;
+	//}
+	//if(*a=='-')
+	//{
+	//	a++;
+	//	s++;
+	//}
+	//while(isdigit(*a))
+	//{
+	//	y=((long double)10*y+(long double)((a++)-'0'));
+	//}
+	//if(*a=='.')
+	//{
+	//	a++;
+	//	while(isdigit(*a))
+	//	{
+	//		p++;
+	//		y=((long double)10*y+(long double)((a++)-'0'));
+	//	}
+	//}
+	//if ((*a=='e')||(*a=='E'))
+	//{
+	//	n=atoi(++a);//what the hell is atoi
+	//}
+	//y=y*tento(n-p);
+	//return(s ? -y : y);
+
 }
 
 void baddigitstr( char *t )
