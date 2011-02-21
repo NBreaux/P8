@@ -1,4 +1,7 @@
 So far included are the files P8.h and p8org.c. decided to use these files which look similar as to page 91 in our books. 
+
+Also I havent quite figured it out yet but if you want to discuss something
+just post it on wave.
                                 
 These are all the functions that need to be implemented into the source
 TODO:   
@@ -10,7 +13,8 @@ TODO:
 		scan ( void ) - pg 112
 		tento (int n) - pg 113
 
-DONE:
+DONE:   
+		atold( char *a ) - pg 95  Miguel: looks good Danny .
 		initscan( void )  - pg 102 
 		illegalch( void ) - pg 101
 		extradot ( int d, char *t) pg 98
@@ -19,7 +23,6 @@ DONE:
 
 Functions that have been implemented but need to be double checked		
 CHECK:
-		atold( char *a ) - pg 95
 		floatstr( char *t) - pg 99
 		intstr( char *t) - pg 103 // Please check implementation of the return statement on line 196 of the source.
 		nexts ( char *s, char *t) - pg 106-108
