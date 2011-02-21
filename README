@@ -25,3 +25,4 @@ CHECK:
 		letterstr( char *t) - pg 104 by Miguel
 		hash ( char *s) - pg 100 by Miguel
 		makename( char *p, char *q, char *r) - pg 105 by Miguel
+		tento (int n) - pg 113 - by Miguel

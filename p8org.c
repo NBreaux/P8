@@ -588,4 +588,21 @@ void shift( void )
 long double tento( int n )
 {
 	long double y,z;
+	
+	if( n < 0 ){
+		/* not sure if its an l or a 1 for now im going with one */
+		return((long double)1 / tento(-n));
+	}
+	else{
+		z = (long double)10;
+		y = (n & 1 ? z : (long double)1 );
+		
+		for(; n >>= 1;){
+			z = z*z;
+			if( n & 1){
+				y = y*z;
+			}
+		}
+		return ( y );
+	}
 }
