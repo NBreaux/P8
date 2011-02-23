@@ -6,12 +6,9 @@ just post it on wave.
 These are all the functions that need to be implemented into the source
 TODO:   		
 		outscan ( void ) - pg 109-111
-		scan ( void ) - pg 112
-		shift ( void ) pg 132 
 		reportbug( void ) pg 131
-		match( void )  pg 127
 		initparse ( void ) pg 126
-		
+				
 		and of course 
 		parse and reduce but i think its given need to look later.
 
@@ -32,3 +29,7 @@ CHECK:
 		hash ( char *s) - pg 100 by Miguel
 		makename( char *p, char *q, char *r) - pg 105 by Miguel
 		tento (int n) - pg 113 - by Miguel
+		scan ( void ) - pg 112
+		shift ( void ) pg 132
+		match( void )  pg 127
+		nextr( void )  pg 128 

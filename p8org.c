@@ -385,11 +385,53 @@ void makename( char *p,char *q,char *r )
 void match( void )
 {
 	void gencode( void );
+	
+	/* implemented by Miguel */
+	if( row < 37 )
+	{
+		top -= subtop[row];
+	}
+	
+	symbol[top] = sigma = newsigma[row] + 400;
+	eli = newsigma[row] + 27;
+	
+	if( row == 0)
+	{
+		mode[top] = (char)0;
+	}
+	else
+	{
+		if( row == 21)
+		{
+			aux[top] = aux[top + 1];
+			mode[top] = (char)modes;
+		}
+	}
+	
+	if( code[row] )
+	{
+		gencode();
+	}
+	
 }
 
 int nextr( void )
 {
 	int r;
+	
+	/* implemented by Miguel */
+	for( r = 0; rbu[r]; r++)
+	
+	if( 5 < r )
+	{
+		bug = 4;
+		return( 0 );
+	}
+	else
+	{
+		rbu = (char)1;
+		return( r );
+	}
 }
 //
 //	st is as follows:
@@ -568,6 +610,19 @@ void reportbug( void )
 	void ouch( int );
 
 	int i,j,k;
+	
+	if( bug < 7 )
+	{
+		printf("\n\n** line %d: %s **", (bug == 3 ? line : eline), bugm[bug-1]);
+		return;
+	}
+	else
+	{
+		if((j = top - 9) < 1)
+		{
+			
+		}
+	}
 }
 
 void scan( void )
@@ -579,10 +634,78 @@ void scan( void )
 
 	int st;
 	char s[MAXL+1],t[MAXL+1];
+	/* Implemented by Miguel */
+	
+	initscan();
+	
+	while(fgets( s, MAXL+1, fps ) != (char*)NULL)
+	{
+		line++;
+		lsymb = symbol[nsymb++] = 400+line;
+		
+		do{
+				if(( st = nexts( s,t )) != 0)
+				{
+					switch( 0 < st ? st : -st ){
+							case 1:	illegalch();
+							break;
+							
+							case 2: delimiter();
+							break;
+							
+							case 3: letterstr( t );
+							break;
+							
+							case 4: baddigitstr( t );
+							break;
+						  
+							case 5: instr( t );
+							break;
+											
+							case 6: floatstr( t );
+							break;
+							
+							default: extradot( st - 5, t);
+					}
+				}
+		}while( 0 < st );
+	}
+	if(fclose( fps ))
+	{
+		print( "** can't close %s **\n", fname);
+		exit(1);
+	}
+	outscan();
 }
 
 void shift( void )
-{
+{ 
+	/* implemented by Miguel  on Feb 22 */
+	if( maxtop < ++top )
+	{
+		maxtop = top;
+	}
+	sigma = (300 <= alpha ? alpha : 100*(alpha/100));
+	symbol[top] = sigma;
+	
+	if( 300 <= alpha )
+	{
+		mode[top] = (char)(aux[top] = 0)
+	}
+	else
+	{
+		aux[top] = alpha;
+		mode[top] = (char)(((alpha - sigma) < 50) + 1);
+	}
+	
+	if( alpha == 306)
+	{
+		fprintf( fpc,"_%d:\n",++label );
+		aux[top] = label;
+	}
+	
+	cli = clj;
+	eline = line;
 }
 
 long double tento( int n )
