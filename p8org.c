@@ -232,6 +232,27 @@ void illegalch( void )
 void initparse( void )
 {
 	int r;
+	
+	if (( fpc = fopen( fcode, "wt" )) == (FILE*)NULL ) {
+		printf( "** can't open %s **\n", fcode );
+		exit(1);
+	}
+	
+	fputs( "\t.model\tsmall\n\t.386\ndgroup\tgroup\t_data\n\tpublic\t_main
+		  \n\tassume\tcs:text,ds:dgroup,ss:dgroup\ntext\tsegment\tpara
+		  public 'code'\n_main\tproc\tnear\n", fpc );
+	
+	if ( nrvar || nrlit ) {
+		fputs( "\tfinit\n", fpc );
+	}
+	
+	isymb = label = maxtop = top = -1;
+	inf = ini = ouf = oui = (char)bug = eos = sd = 0;
+	bstop = brk-1;
+	
+	for ( r = 0; r < 6; r++ ) {
+		rbu[r] = (char)0;
+	}
 }
 
 
