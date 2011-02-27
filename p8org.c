@@ -606,12 +606,113 @@ void ouch( int c )
 	putchar( c );
 }
 
-void outscan( void )
+void outscan( void ) // By Devin 2/26
 {
 	void makename( char *,char *,char * ),ouch( int );
 
 	int c,i,j,k;
 	char fsym[13];
+	
+	fclose( fpe );
+	free( (void *)hashp );
+	
+	if (nerr)
+	{
+		printf("\n\n%d error%sdetected in scan\n\n",
+			   nerr, (nerr < 2 ? " " : "s "));
+		
+		while ((c = getc( fpe )) != EOF) {
+			ouch(c);
+		}
+		
+		fclose( fpe );
+		puts( "\n" );
+	}
+
+	if (sopt) { // goes to a
+		makename( fname, "sym", fsym );
+		
+		if ((fps = fopen( fsym, "wt" )) == (FILE *)NULL) {
+			printf("** can't open %s **", fsym );
+			exit( 1 );
+		}
+		
+		fprintf( fps, "\t\t\t\tSymbol tables: %s\n", fname );
+		
+		if (nrvar) {
+			fputs( "\n\nreal variables\n\n", fps );
+			for (i = 0; i < nrvar; i++) {
+				fprintf( fps, "%6d	%s\n",
+						100 + i, var[i] );
+			}
+		}
+		
+		if (nivar) {
+			fputs( "\n\ninteger variables\n\n", fps );
+			for ( i = 0; i < nivar; i++ ) {
+				fprintf( fps, "%6d	%s\n",
+						150 + i, var[50+i] );
+			}
+		}
+		
+		if (nrlit) {
+			fputs( "\n\nreal literals\n\n", fps );
+			for ( i = 0; i < nrlit; i++ ) {
+				fprintf( fps, "%6d%25.14e\n",
+						200 + i, (double)rlit[i] );
+			}
+		}
+		
+		if (nilit) {
+			fputs( "\n\ninteger literals\n\n", fps );
+			for ( i = 0; i < nilit; i++ ) {
+				fprintf( fps, "%6d%15ld\n",
+						250 + i, ilit[i] );
+			}
+		}
+		
+		if (nerr) {
+			fprintf( fps, "\n\n%d error%sdetected in scan\n\n",
+					nerr, (nerr < 2 ? " " : "s "));
+			fpe = fopen( "$$err$$", "rt" );
+			
+			while ((c = getc( fpe )) != EOF ) {
+				fputc( c, fps );
+			}
+			
+			fclose( fpe );
+			fputs( "\n", fps );
+		}
+		
+		fprintf( fps, "\t\t\tinternal form: %d symbols\n\n",nsymb );
+		
+		for (i = 0; i < nsymb; i++) {
+			k = symbol[i];
+			
+			if (400 < k) {
+				fprintf( fps, "\n%6d", k );
+				j = 0;
+			}
+			
+			else {
+								
+				if (SYMLIN < ++j) {
+					fprintf( fps, "\n	" );
+					j = 1;
+				}
+				
+				fprintf( fps, "%5d", k );
+			}
+		}
+		
+		fputc( (int)NEWL, fps );
+		fclose( fps );
+	}
+	
+	if (unlink( "$$err$$" ) != 0 ) {
+		puts( "** cannot delete \"$$err$$\" **" );
+	}
+	
 }
 
 void parse( void )

@@ -5,7 +5,6 @@ just post it on wave.
                                 
 These are all the functions that need to be implemented into the source
 TODO:   		
-		outscan ( void ) - pg 109-111
 				
 		and of course 
 		parse and reduce but i think its given need to look later.
@@ -20,8 +19,6 @@ DONE:
 		delimiter ( void ) - pg 97
 		baddigitstr( char *t) - pg 96
 		intstr( char *t) - pg 103  done by Miguel, checked by Miguel
-		initparse ( void ) pg 126
-		reportbug( void ) pg 131
 
 Functions that have been implemented but need to be double checked		
 CHECK:   
@@ -33,3 +30,6 @@ CHECK:
 		shift ( void ) pg 132
 		match( void )  pg 127
 		nextr( void )  pg 128 
+		reportbug( void ) pg 131
+		initparse ( void ) pg 126
+		outscan ( void ) - pg 109-111
