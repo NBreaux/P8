@@ -229,7 +229,7 @@ void illegalch( void )
 	lsymb = symbol[nsymb++] = 0;
 }
 
-void initparse( void )
+void initparse( void ) // By Devin 2/26
 {
 	int r;
 	
@@ -626,24 +626,54 @@ void reduce( void )
 	void match( void );
 }
 
-void reportbug( void )
+void reportbug( void ) // By Devin 2/26
 {
 	void ouch( int );
 
 	int i,j,k;
+	
+	fclose( pfc );
+	unlink( fcode );
 	
 	if( bug < 7 )
 	{
 		printf("\n\n** line %d: %s **", (bug == 3 ? line : eline), bugm[bug-1]);
 		return;
 	}
-	else
+	
+	printf( "\n\n** bug at or near line %d: numbug = %d **\n\n sigma = %4d
+		   \n alpha =%4d\n\n isymb =%4d\n top =%4d\n\n cli =%4d\n
+		   clj =%4d\n\n", eline, bug, sigma, alpha, isymb, top, cli, clj );
+
+	if((j = top - 9) < 1)
 	{
-		if((j = top - 9) < 1)
-		{
-			
-		}
+		j = 0;
 	}
+	
+	printf( " stack[%4d - top ] = ", j );
+	
+	for ( i = j; i <= top; i++ ) {
+		printf( "%5d", symbol[i] );
+	}
+	
+	ouch( (int)NEWL );
+	
+	if ( isymb < nsymb ) {
+		if ((nsymb <= ( k = isymb + 9 ))) {
+			k = nsymb - 1;
+		}
+		
+		printf( "string[%4d - %4d] = ", isymb, k );
+		
+		for ( i = isymb; i <= k; i++ ) {
+			printf( "%5d", symbol[i] );
+		}
+		
+		ouch( (int)NEWL );
+	}
+	
+	printf( "\n\nmaxtop = %d\n\n", maxtop );
+	
 }
 
 void scan( void )
