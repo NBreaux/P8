@@ -118,17 +118,27 @@ void emit0( int n )
 }
 
 void emit1( int i )
-{
+{ 
+	fprintf ( fpc, "\t%s\n", inst[i] );
 }
 
 void emit2( int i,int j )
 {
 	void emit0( int );
+	
+	fprintf ( fpc, "\t%s\t",inst[i] );
+	emit0( j );
+	fputs ( "\n", fpc );	
 }
 
 void emit3( int i,int j,int k )
 {
 	void emit0( int );
+	
+	emit0(j);
+	fputs ( ",", fpc);
+	emit0 ( k );
+	fputs ( "\n" , fpc);	
 }
 
 void extradot( int d,char *t )
