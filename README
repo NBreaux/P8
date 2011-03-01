@@ -4,8 +4,6 @@ These are all the functions that need to be implemented into the source
 TODO:      
         Parse() - this should be easy enough to implement !
 		getsymbol();
-		comp ( int s, int *p) - pg 123
-		closeout ( void ) - pg 121/122
 		reduce ( void ) - pg 130
 DONE:   
 		nexts ( char *s, char *t) - pg 106-108 done by Danny checked by Miguel
@@ -22,6 +20,8 @@ DONE:
 		emit2( int i, int j) by nick
 		emit3( int i, int j, int k)  by nick 
 		emit0( int n ) by miguel
+		comp ( int s, int *p) - pg 123 by miguel
+		closeout ( void ) - pg 121/122 by miguel
 
 Functions that have been implemented but need to be double checked		
 CHECK:   Get to fucking work nick!
