@@ -1408,12 +1408,79 @@ void parse( void )
 {
 	void closeout( void ),getsymbol( void ),initparse( void ),
 		reduce( void ),reportbug( void ),shift( void );
+	
+	initparse();
+	getsymbol();
+	
+	if( alpha != 350 ){
+		bug = 3;
+		reportbug();
+		return;
+	}
+	else{
+		shift();
+		getsymbol();
+		
+		do{
+			if(eos){
+				if((top == 0) && (sigma == 400)){
+					break; /* break to B  out of while do-while*/
+				}
+				else{
+					reduce();
+				}
+			}
+			else{
+				switch((int)c1[c1i][c1j]){
+					case 0:
+						shift();
+						getsymbol();
+						break; /* break to A */
+					case 1:
+						reduce();
+						break; /* break to A */
+					default:
+						bug = 10+(int)c1[c1i][c1j];
+				}
+			}
+		} while( !bug ); /* THIS IS A */
+		if(bug){ /*This is B */
+			reportbug();
+		}
+		else{
+			closeout();
+		}
+	}
 }
 
 void reduce( void )
 {
 	int comp( int,int * );
 	void match( void );
+	
+	row = first[cli];
+	if( row < 37 ){
+		while(1){
+			if((bug = comp( top, c2+c2ptr[row])) < 2){
+				break; /* back to A */
+			}
+			else{
+				if(same[++row] != sigma){
+					bug = 2;
+					break; /* back to A */
+				}
+				else{
+					if((row == 16) && (symbol[top-1] != 403)){
+						row++;
+					}
+				}
+			}
+		}
+	}
+	/* this is A */
+	if( bug == 0){
+		match();
+	}
 }
 
 void reportbug( void ) // By Devin 2/26
