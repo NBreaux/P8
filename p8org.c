@@ -117,6 +117,30 @@ void closeout( void )
 	}
 	
 	fputs("_data\tends\nstack\tsegment\tstack\n\tdw\t100h dup(?)\nstack\tends\n", fpc);
+	
+	if(inf){
+		fputs("\textern\t_inf:near\n", fpc);
+	}
+	if(ini){
+		fputs("\textern\t_ini:near\n", fpc);
+	}
+	if(ouf){
+		fputs("\textern\t_outf:near\n", fpc);
+	}
+	if(oui){
+		fputs("\textern\t_outi:near\n", fpc);
+	}
+	fputs("\tend\n" fpc);
+	
+	if(fclose(fpc)){
+		printf("** can't close %s**\n", fcode);
+		exit(1);
+	}
+	makename(fname, "asm", fasm);
+	if(fopen( fasm,"rt" != (FILE*)NULL)){
+		unlink(fasm);
+	}
+	rename(fcode,fasm);
 }
 
 int comp( int s,int *p )
