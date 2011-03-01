@@ -14,6 +14,11 @@ DONE:
 		delimiter ( void ) - pg 97
 		baddigitstr( char *t) - pg 96
 		intstr( char *t) - pg 103  done by Miguel, checked by Miguel
+		gencode() these function should be provided in the download
+		emit1( int i) by nick
+		emit2( int i, int j) by nick
+		emit3( int i, int j, int k)  by nick 
+		emit0( int n ) by miguel
 
 Functions that have been implemented but need to be double checked		
 CHECK:   Get to fucking work nick!
@@ -27,9 +32,6 @@ CHECK:   Get to fucking work nick!
 		match( void )  pg 127
 		nextr( void )  pg 128 
 		reportbug( void ) pg 131
-		initparse ( void ) pg 126
+		initparse ( void ) pg 126 - looks like the teacher is giving us this
 		outscan ( void ) - pg 109-111
-		gencode() these function should be provided in the download
-		emit1( int i) by nick
-		emit2( int i, int j) by nick
-		emit3( int i, int j, int k)  by nick
+		
