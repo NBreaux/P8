@@ -4,6 +4,7 @@ These are all the functions that need to be implemented into the source
 TODO:      
         Parse() - this should be easy enough to implement !
 		reduce ( void ) - pg 130
+		closeout()- pg 121/122 - forgot to add this one
 DONE:   
 		nexts ( char *s, char *t) - pg 106-108 done by Danny checked by Miguel
 		atold( char *a ) - pg 95  done by Danny checked by Miguel
