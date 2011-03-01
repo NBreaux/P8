@@ -805,6 +805,7 @@ void gencode( void )
 
 void getsymbol( void )
 {
+	 
 }
 //
 //	If string s is new, return -(hash+1)
