@@ -97,10 +97,39 @@ void closeout( void )
 
 	int i;
 	char fasm[13];
+	
+	fputs("\tret\n_main\tendp\ntext\tends\n_data\tsegment\tword public 'data'\n",fpc);
+	for(i = 0; i < nrlit; i++){
+		/* the part in this line \treal im not sure if its \treal10 or \treall0 */
+		fprintf( fpc, "c%.2d\treal10\t%21.14e\n", i, (double)rlit[i] );
+	}
+	
+	for(i = 0; i < nilit; i++){
+		fprintf( fpc, "c%.2d\tdd\t%ld\n", 50+i, ilit[i] )
+	}
+	
+	for(i = 0; i < nrvar; i++){
+		fprintf( fpc, "v%.2d\treal10\t0.0\t;%-s\n", i, var[i]);
+	}
+	
+	for(i = 0; i < nivar; i++){
+		fprintf( fpc, "v%.2d\tdd\t0\t;%-s\n", 50+i, var[50+i]);
+	}
+	
+	fputs("_data\tends\nstack\tsegment\tstack\n\tdw\t100h dup(?)\nstack\tends\n", fpc);
 }
 
 int comp( int s,int *p )
 {
+	for(modes = (int)mode[s]; *p && s; p++ ){
+		if(symbol[--s] != *p){
+			return 2;
+		}
+		else if(2 < (modes |= (int)mode[s])){
+			return 1;
+		}
+	}
+	return 0;
 }    
 
 void delimiter( void )
