@@ -6,9 +6,9 @@ just post it on wave.
 These are all the functions that need to be implemented into the source
 TODO:      
                 Parse() - this should be easy enough to implement !
-                gencode() these function should be provided in the download from blackboard on the discussion area, I think
+                gencode() these function should be provided in the download 				   from blackboard on the discussion area, I think
                 
-                Also note that nate updated a p8 header that is for linux/unix systems which differs from the file we have slightly
+                Also note that nate updated a p8 header that is for linux/unix 						systems which differs from the file we have slightly
                 ill probably add that to this repository. - Miguel
 DONE:   
 		nexts ( char *s, char *t) - pg 106-108 done by Danny checked by Miguel
