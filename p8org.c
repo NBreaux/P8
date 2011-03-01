@@ -114,7 +114,17 @@ void delimiter( void )
 
 void emit0( int n )
 {
-	
+	if(n < 100){
+		fprintf(fpc,"%s",reg[n]);
+	}
+	else{
+		if( n < 200){
+			fprintf(fpc, "v%.2d", n-100);
+		}
+		else{
+			fprintf(fpc, "c%.2d",n-200)
+		}
+	}
 }
 
 void emit1( int i )
