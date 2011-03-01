@@ -3,7 +3,10 @@ So far included are the files P8.h and p8org.c
 These are all the functions that need to be implemented into the source
 TODO:      
         Parse() - this should be easy enough to implement !
-		emit0( int n );
+		getsymbol();
+		comp ( int s, int *p) - pg 123
+		closeout ( void ) - pg 121/122
+		reduce ( void ) - pg 130
 DONE:   
 		nexts ( char *s, char *t) - pg 106-108 done by Danny checked by Miguel
 		atold( char *a ) - pg 95  done by Danny checked by Miguel
