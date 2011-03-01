@@ -834,7 +834,24 @@ void gencode( void )
 
 void getsymbol( void )
 {
-	 
+	if (nsymb <= isymb){
+        eos++;
+	 }
+	else{
+	  	do{
+				if (nsymb >= ++isymb){
+					eos++;
+				}
+				else{ 
+					if (400 < (alpha = symbol[isymb])){
+	        	line = alpha - 400;
+					}
+	    	}
+			} while( 400 < alpha) && !eos );
+			if (!eos){
+				clj = (alpha < 300 ? alpha/100-1 : alpha-(alpha < 310 ? 298 : 338));
+     	}
+  }
 }
 //
 //	If string s is new, return -(hash+1)
