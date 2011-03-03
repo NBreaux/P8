@@ -105,7 +105,7 @@ void closeout( void )
 	}
 	
 	for(i = 0; i < nilit; i++){
-		fprintf( fpc, "c%.2d\tdd\t%ld\n", 50+i, ilit[i] )
+		fprintf( fpc, "c%.2d\tdd\t%ld\n", 50+i, ilit[i] );
 	}
 	
 	for(i = 0; i < nrvar; i++){
@@ -130,7 +130,7 @@ void closeout( void )
 	if(oui){
 		fputs("\textern\t_outi:near\n", fpc);
 	}
-	fputs("\tend\n" fpc);
+	fputs("\tend\n", fpc);
 	
 	if(fclose(fpc)){
 		printf("** can't close %s**\n", fcode);
@@ -175,7 +175,7 @@ void emit0( int n )
 			fprintf(fpc, "v%.2d", n-100);
 		}
 		else{
-			fprintf(fpc, "c%.2d",n-200)
+			fprintf(fpc, "c%.2d",n-200);
 		}
 	}
 }
@@ -229,7 +229,7 @@ void floatstr( char *t )
 	x=atold(t);
 	for(i=0; i < nrlit; i++)
 	{
-		if(x==rlit[i];)
+		if(x==rlit[i])
 		{
 			lsymb = symbol[nsymb++] = 200+i;
 			return;
@@ -871,7 +871,7 @@ void getsymbol( void )
 	        	line = alpha - 400;
 					}
 	    	}
-			} while( 400 < alpha) && !eos );
+			} while( (400 < alpha) && !eos );
 			if (!eos){
 				clj = (alpha < 300 ? alpha/100-1 : alpha-(alpha < 310 ? 298 : 338));
      	}
@@ -927,9 +927,7 @@ void initparse( void ) // By Devin 2/26
 		exit(1);
 	}
 	
-	fputs( "\t.model\tsmall\n\t.386\ndgroup\tgroup\t_data\n\tpublic\t_main
-		  \n\tassume\tcs:text,ds:dgroup,ss:dgroup\ntext\tsegment\tpara
-		  public 'code'\n_main\tproc\tnear\n", fpc );
+	fputs("\t.386\n\t.model\tflat.stdcall\n\t.code\nmain\tproc\n", fpc); 
 	
 	if ( nrvar || nrlit ) {
 		fputs( "\tfinit\n", fpc );
@@ -1080,7 +1078,7 @@ void letterstr( char *t )
 void makename( char *p,char *q,char *r )
 {
 	for(; *p && (*p != '.');){
-		*r++ = *p++
+		*r++ = *p++;
 	}
 	
 	*r++ = '.';
@@ -1498,9 +1496,7 @@ void reportbug( void ) // By Devin 2/26
 		return;
 	}
 	
-	printf( "\n\n** bug at or near line %d: numbug = %d **\n\n sigma = %4d
-		   \n alpha =%4d\n\n isymb =%4d\n top =%4d\n\n cli =%4d\n
-		   clj =%4d\n\n", eline, bug, sigma, alpha, isymb, top, cli, clj );
+	printf( "\n\n** bug at or near line %d: numbug = %d **\n\n sigma = %4d\n alpha =%4d \n\n isymb =%4d \n top =%4d\n\n cli =%4d \n clj =%4d \n\n", eline, bug, sigma, alpha, isymb, top, cli, clj );
 
 	if((j = top - 9) < 1)
 	{
@@ -1598,7 +1594,7 @@ void shift( void )
 	
 	if( 300 <= alpha )
 	{
-		mode[top] = (char)(aux[top] = 0)
+		mode[top] = (char)(aux[top] = 0);
 	}
 	else
 	{
