@@ -1,7 +1,10 @@
 So far included are the files P8.h and p8org.c
 
 These are all the functions that need to be implemented into the source
-TODO:      
+TODO:      fix remaining errors/warnings
+
+error/warning list from visual studio 2008/windows on the wave*
+1>p8 debug - 16 error(s), 18 warning(s)
         
 DONE:   
 		nexts ( char *s, char *t) - pg 106-108 done by Danny checked by Miguel
@@ -23,8 +26,7 @@ DONE:
 		getsymbol(); by Nick, fixed by Miguel
 
 Functions that have been implemented but need to be double checked		
-CHECK:   Get to fucking work nick!
-            
+CHECK:           
 		letterstr( char *t) - pg 104 by Miguel
 		hash ( char *s) - pg 100 by Miguel
 		makename( char *p, char *q, char *r) - pg 105 by Miguel
@@ -39,3 +41,4 @@ CHECK:   Get to fucking work nick!
 		parse() - pg 129 by miguel
 		reduce ( void ) - pg 130  by miguel
 		
+
