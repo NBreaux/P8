@@ -24,14 +24,8 @@ DONE:
 		comp ( int s, int *p) - pg 123 by miguel
 		closeout ( void ) - pg 121/122 by miguel
 		getsymbol(); by Nick, fixed by Miguel
-<<<<<<< HEAD
-		initparse ( void ) pg 126 - looks like the teacher is giving us this
-=======
-
-Functions that have been implemented but need to be double checked		
-CHECK:           
+		initparse ( void ) pg 126 - looks like the teacher is giving us this        
 		letterstr( char *t) - pg 104 by Miguel checked by danny
->>>>>>> 4254da1a40bc44af212991d702c2d32b82ad7baf
 		hash ( char *s) - pg 100 by Miguel
 		tento (int n) - pg 113 - by Miguel
 		letterstr( char *t) - pg 104 by Miguel  
