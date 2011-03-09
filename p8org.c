@@ -4,6 +4,7 @@
 //
 
 #include "p8.h"
+#include <stdlib.h>
 
 int main( int argc,char **argv )
 {
@@ -60,7 +61,7 @@ long double atold( char *a )
 	
 	while(isdigit(*a))
 	{
-		y=((long double)10*y+(long double)((a++)-'0'));
+		y=((long double)10*y+(long double)((*a++)-'0'));
 	}
 	
 	if(*a=='.')
@@ -69,7 +70,7 @@ long double atold( char *a )
 		while(isdigit(*a))
 		{
  			p++;
- 			y=((long double)10*y+(long double)((a++)-'0'));
+ 			y=((long double)10*y+(long double)((*a++)-'0'));
 		}
 	}
 	if ((*a=='e')||(*a=='E'))
@@ -137,7 +138,7 @@ void closeout( void )
 		exit(1);
 	}
 	makename(fname, "asm", fasm);
-	if(fopen( fasm,"rt" != (FILE*)NULL)){
+	if(fopen( fasm,"rt") != (FILE*)NULL){
 		unlink(fasm);
 	}
 	rename(fcode,fasm);
@@ -863,19 +864,19 @@ void getsymbol( void )
 	 }
 	else{
 	  	do{
-				if (nsymb >= ++isymb){
-					eos++;
-				}
-				else{ 
-					if (400 < (alpha = symbol[isymb])){
+		   if (nsymb >= ++isymb){
+			 	eos++;
+		   	}
+		   else{ 
+				if (400 < (alpha = symbol[isymb])){
 	        	line = alpha - 400;
-					}
-	    	}
-			} while( (400 < alpha) && !eos );
-			if (!eos){
-				clj = (alpha < 300 ? alpha/100-1 : alpha-(alpha < 310 ? 298 : 338));
+				}
+	       	}
+		}while( (400 < alpha) && !eos );
+		if (!eos){
+			c1j = (alpha < 300 ? alpha/100-1 : alpha-(alpha < 310 ? 298 : 338));
      	}
-  }
+  	}
 }
 //
 //	If string s is new, return -(hash+1)
@@ -934,7 +935,8 @@ void initparse( void ) // By Devin 2/26
 	}
 	
 	isymb = label = maxtop = top = -1;
-	inf = ini = ouf = oui = (char)bug = eos = sd = 0;
+	bug = eos = sd = 0;
+	inf = ini = ouf = oui = (char)bug;
 	bstop = brk-1;
 	
 	for ( r = 0; r < 6; r++ ) {
@@ -950,8 +952,8 @@ void initscan( void )// By Miguel - 2/16 @ 12:10 PM  added initscan function.
 	int h,i;
 	
 	ch = NEWL;
-	line = nerr = nilit = nivar = nrlit = nvar = nsymb = 0;
-	hash = (HASHREC *)malloc( HSIZE*sizeof( HASHREC));
+	line = nerr = nilit = nivar = nrlit = nrvar = nsymb = 0;
+	hashp = (HASHREC *)malloc( HSIZE*sizeof( HASHREC));
 	
 	if( hashp == (HASHREC *)NULL )
 	{
