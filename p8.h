@@ -1,5 +1,4 @@
-//	p8.h		1999 nov 14	last modified 2002 mar 20
-//
+//	p8.h		1996 sep 12	last modified 2000 may 17
 //
 
 #include <ctype.h>
@@ -24,6 +23,7 @@
 	FILE *fpc,*fpe,*fps;
 	HASHREC *hashp;
 	long double rlit[50];
+	long ilit[50];
 	int alpha,aux[128],brk[16],*bstop,bug,c1i,c1j,
 		c2[86]={424,354,100,  0,424,363,421,  0,404,403,
 			  0,424,303,  0,420,  0,305,  0,304,  0,
@@ -34,9 +34,7 @@
 			356,  0,357,425,  0,358,425,  0,405,401,
 			350,  0,405,350,  0,401,  0,307,  0,306,
 			  0,363,421,  0,303,0},
-		eline,eos,err,
-		ilit[50],
-		isymb,label,line,lrw,lsymb,maxtop,modes,nerr,
+		eline,eos,err,isymb,label,line,lrw,lsymb,maxtop,modes,nerr,
 		nilit,nivar,nrlit,nrvar,nsymb,row,
 		same[38]={364,364,364,364,364,364,364,406,406,406,
 			  406,406,406,100,100,100,100,100,353,353,
@@ -94,7 +92,7 @@
 		{1,1,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,1,2,2,2,2,2,2,2,2},
 		{0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,2,2,2,0,2,2,2,2,2,2,2,2},
 		{1,2,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2},
-		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9},
 		{0,2,0,0,0,0,0,2,0,0,2,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
 		{1,2,1,1,1,1,1,2,1,1,2,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2},  // 29
 		{0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
@@ -151,7 +149,7 @@
 			    0,0,0,0,0,0,0,0,0,0,0, 0, 0,0,0,0,
 			    0,0,0,0,0,0,0,0,0,0,0, 0, 0,1,0,0,10,11,12},
 		*e0="line%5d - %d decimal points in numeric string [%s]\n",
-		*e1="line%5d - illegal character [%c]\n",
+		*e1="Line%5d - illegal character [%c]\n",
 		*e2="line%5d - illegal numeric string [%s]\n",
 		*e3="line%5d - variable is doubly defined [%s]\n",
 		*e4="line%5d - unrecognized id [%s]\n",
@@ -161,16 +159,16 @@
 			    0, 0, 0, 7,39,40,47,48,41,42,
 			    0, 0, 0,43,44,45,46, 0, 0,33,
 			    0,35,22,26},
-		*fcode="$$p8$$.s",
+		*fcode="$$p8$$.asm",
 		*fname,inf,ini,
-		*inst[41]={"addl","call","cdq" ,"cmpl","cwd" ,"idivl",
-			   "imull","ja"  ,"jae" ,"je"  ,"jl"  ,"jle" ,
-			   "jmp" ,"jne" ,"movl" ,"negl","popl" ,"pushl",
-			   "sahf","subl" ,"xchgl",
-			   "faddp"  ,"faddp","fchs" ,"fcom"  ,"fcomp"    ,
-			   "fcompp","fdivrp" ,"fdivrp","fdivp" ,"fdivp"   ,
-			   "fldt"   ,"fmulp" ,"fmulp","fstpt"  ,"fnstsw\t%ax",
-			   "fsubrp"  ,"fsubrp","fsubp","fsubp","fxch"},  
+		*inst[41]={"add" ,"call","cdq" ,"cmp" ,"cwd" ,"idiv",
+			   "imul","ja"  ,"jae" ,"je"  ,"jl"  ,"jle" ,
+			   "jmp" ,"jne" ,"mov" ,"neg" ,"pop" ,"push",
+			   "sahf","sub" ,"xchg",
+			   "fadd"  ,"faddp","fchs" ,"fcom"  ,"fcomp"    ,
+			   "fcompp","fdiv" ,"fdivp","fdivr" ,"fdivrp"   ,
+			   "fld"   ,"fmul" ,"fmulp","fstp"  ,"fstsw\tax",
+			   "fsub"  ,"fsubp","fsubr","fsubrp","fxch"},  
 		kind[131]={5,5,5,5,5,5,5,5,5,4,0,5,5,5,5,5,
 			   5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
 			   4,5,5,5,5,5,5,5,3,3,3,3,3,3,3,3,
@@ -187,7 +185,7 @@
 			       6, 6, 6, 6, 6, 6, 6, 8, 8,23,
 			      23,23,23,26},
 		ouf,oui,rbu[6],
-		*reg[6]={"%eax","%ebx","%ecx","%edx","%esi","%edi"},
+		*reg[6]={"eax","ebx","ecx","edx","esi","edi"},
 		*ssp,*ssp1,
 		subtop[37]={3,3,2,2,1,1,1,2,1,1,
 			    1,1,0,2,2,1,0,0,4,3,
