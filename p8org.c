@@ -4,7 +4,6 @@
 //
 
 #include "p8.h"
-#include <stdlib.h>
 
 int main( int argc,char **argv )
 {
@@ -999,18 +998,14 @@ void intstr( char *t )// By Miguel - 02/16 @04:23 am - I know im up late again :
 			return;
 		}
 	}
-	else{
-		if( 50 <= nilit )
-		{
-			puts( "** too many int literals **" );
-			exit(1);
-		}
-	  else
-		{
-			ilit[nilit++] = x;
-			lsymb = symbol[nsymb++] = 249 + nilit;
-		}
+	if( 50 <= nilit ){
+		puts( "** too many int literals **" );
+		exit(1);
 	}
+	else{
+		ilit[nilit++] = x;
+		lsymb = symbol[nsymb++] = 249 + nilit;
+		}
 }
 
 void letterstr( char *t )
@@ -1103,7 +1098,7 @@ void match( void )
 	}
 	
 	symbol[top] = sigma = newsigma[row] + 400;
-	eli = newsigma[row] + 27;
+	c1i = newsigma[row] + 27;
 	
 	if( row == 0)
 	{
@@ -1139,7 +1134,7 @@ int nextr( void )
 	}
 	else
 	{
-		rbu = (char)1;
+		rbu[r] = (char)1;
 		return( r );
 	}
 }
@@ -1165,7 +1160,7 @@ int nexts( char *s,char *t )
 	if (ch == NEWL){
 		p=s;
 	}
-	while (l) // that's and L
+	while (1) // that's and L
 	{
        /* forgot this */
 		ch = *p;
@@ -1278,7 +1273,7 @@ int nexts( char *s,char *t )
 								if (st == 0)
 								{
 									p++;
-									return(l);
+									return(1);
 								}
 								else
 								{
@@ -1458,7 +1453,7 @@ void reduce( void )
 	int comp( int,int * );
 	void match( void );
 	
-	row = first[cli];
+	row = first[c1i];
 	if( row < 37 ){
 		while(1){
 			if((bug = comp( top, c2+c2ptr[row])) < 2){
@@ -1489,7 +1484,7 @@ void reportbug( void ) // By Devin 2/26
 
 	int i,j,k;
 	
-	fclose( pfc );
+	fclose( fpc );
 	unlink( fcode );
 	
 	if( bug < 7 )
@@ -1498,7 +1493,7 @@ void reportbug( void ) // By Devin 2/26
 		return;
 	}
 	
-	printf( "\n\n** bug at or near line %d: numbug = %d **\n\n sigma = %4d\n alpha =%4d \n\n isymb =%4d \n top =%4d\n\n cli =%4d \n clj =%4d \n\n", eline, bug, sigma, alpha, isymb, top, cli, clj );
+	printf( "\n\n** bug at or near line %d: numbug = %d **\n\n sigma = %4d\n alpha =%4d \n\n isymb =%4d \n top =%4d\n\n c1i =%4d \n c1j =%4d \n\n", eline, bug, sigma, alpha, isymb, top, c1i, c1j );
 
 	if((j = top - 9) < 1)
 	{
@@ -1565,7 +1560,7 @@ void scan( void )
 							case 4: baddigitstr( t );
 							break;
 						  
-							case 5: instr( t );
+							case 5: intstr( t );
 							break;
 											
 							case 6: floatstr( t );
@@ -1578,7 +1573,7 @@ void scan( void )
 	}
 	if(fclose( fps ))
 	{
-		print( "** can't close %s **\n", fname);
+		printf( "** can't close %s **\n", fname);
 		exit(1);
 	}
 	outscan();
@@ -1610,7 +1605,7 @@ void shift( void )
 		aux[top] = label;
 	}
 	
-	cli = clj;
+	c1i = c1j;
 	eline = line;
 }
 
