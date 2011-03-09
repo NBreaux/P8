@@ -1,0 +1,66 @@
+				Symbol tables: fib.p8
+
+
+integer literals
+
+   250     4294967295
+   251              1
+   252             10
+
+
+36 errors detected in scan
+
+line    1 - illegal character []
+line    2 - unrecognized id [int]
+line    2 - unrecognized id [n]
+line    2 - unrecognized id [next]
+line    2 - unrecognized id [prev]
+line    2 - unrecognized id [temp]
+line    2 - illegal character []
+line    3 - illegal character []
+line    4 - unrecognized id [n]
+line    4 - illegal character []
+line    5 - unrecognized id [prev]
+line    5 - illegal character []
+line    6 - unrecognized id [next]
+line    6 - illegal character []
+line    7 - unrecognized id [while]
+line    7 - unrecognized id [n]
+line    7 - illegal character []
+line    8 - unrecognized id [n]
+line    8 - unrecognized id [n]
+line    8 - illegal character []
+line    9 - unrecognized id [temp]
+line    9 - unrecognized id [prev]
+line    9 - illegal character []
+line   10 - unrecognized id [prev]
+line   10 - unrecognized id [next]
+line   10 - illegal character []
+line   11 - unrecognized id [next]
+line   11 - unrecognized id [temp]
+line   11 - unrecognized id [next]
+line   11 - illegal character []
+line   12 - unrecognized id [output]
+line   12 - unrecognized id [n]
+line   12 - unrecognized id [next]
+line   12 - illegal character []
+line   13 - illegal character []
+line   14 - illegal character []
+
+			internal form: 69 symbols
+
+
+   401  350    0
+   402    0    0  363    0  363    0  363    0  364    0
+   403    0
+   404  354  250  364    0
+   405  354  250  364    0
+   406  354  251  364    0
+   407    0  352  359  252  353  350    0
+   408  354  355  251  364    0
+   409  354  364    0
+   410  354  364    0
+   411  354  355  364    0
+   412    0  363  364    0
+   413  351    0
+   414  351    0
