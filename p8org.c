@@ -890,7 +890,7 @@ int hash( char *s )
 	int h,q;
 	char *p;
 	/* I cant remember but can we just leave a for loop without braces? */
-	for( p = s, q = 0; *p; q = q+(int)*p, p++)
+	for( p = s, q = 0; *p; q = q+(int)*p, p++){}
 	
 	h = ( q % HSIZE ) - 1;
 	
@@ -898,13 +898,13 @@ int hash( char *s )
 		if(HSIZE <= ++h){
 			h = 0;
 		}
-		else if( hashp[h].ptss == (char*)NULL){
+		if( hashp[h].ptss == (char*)NULL){
 			return( -(h+1));
 		}
-		else if( strcmp( s, hashp[h].ptss) == 0){
+	   else if( strcmp( s, hashp[h].ptss) == 0){
 			return( h );
 		}
-		else if( HSIZE <= ++q ){
+	    else if( HSIZE <= ++q ){
 			puts( "** hash table overflow **");
 			exit(1);
 		}
@@ -927,7 +927,7 @@ void initparse( void ) // By Devin 2/26
 		exit(1);
 	}
 	
-	fputs("\t.386\n\t.model\tflat.stdcall\n\t.code\nmain\tproc\n", fpc); 
+	fputs("\t.386\n\t.model\tflat,stdcall\n\t.code\nmain\tproc\n", fpc); 
 	
 	if ( nrvar || nrlit ) {
 		fputs( "\tfinit\n", fpc );
@@ -952,7 +952,7 @@ void initscan( void )// By Miguel - 2/16 @ 12:10 PM  added initscan function.
 	
 	ch = NEWL;
 	line = nerr = nilit = nivar = nrlit = nrvar = nsymb = 0;
-	hashp = (HASHREC *)malloc( HSIZE*sizeof( HASHREC));
+	hashp = (HASHREC*)malloc(HSIZE*sizeof(HASHREC));
 	
 	if( hashp == (HASHREC *)NULL )
 	{
@@ -976,7 +976,7 @@ void initscan( void )// By Miguel - 2/16 @ 12:10 PM  added initscan function.
 	
 	for( i = 0; i < sizeof( trw )/sizeof( char *); i++)
 	{
-		h = -(hash( trw[i] + 1));
+		h = -(hash( trw[i] ) + 1);
 		hashp[h].ptss = trw[i];
 		hashp[h].icod = 300 + i;
 	}
@@ -1023,22 +1023,19 @@ void letterstr( char *t )
 			fprintf( fpe, e4, line, t );
 			nerr++;
 		}
-	else
-	{
+
 		if((i < 200) && ((lrw == 300) || (lrw == 301))){
 			fprintf( fpe, e3, line, t );
 			nerr++;
 		}
-		else{
-			if( 300 <= i)
-				lrw = i;
-			else
-				lsymb = symbol[nsymb++] = i;
-		}
-	 }
+		if( 300 <= i)
+            lrw = i;
+			
+		 lsymb = symbol[nsymb++] = i;
 	}
+	
 	else{
-		if( ssp1 <= ssp+strlen( t ) ){
+		if( ssp1 <= ssp + strlen(t) ){
 			puts( "** out of string space **" );
 			unlink( "$$err$$");
 			fclose( fps );
@@ -1053,20 +1050,18 @@ void letterstr( char *t )
 			
 			if( lrw == 300 ){
 				var[nrvar] = hashp[h].ptss;
-				lsymb = symbol[nsymb++] = hashp[h].icod = 100 + (nivar++);
+				lsymb = symbol[nsymb++] = hashp[h].icod = 100 + (nrvar++);
 				return;
 			}
+            if( lrw == 301 ){
+			    var[50+nivar] = hashp[h].ptss;
+				lsymb = symbol[nsymb++] = hashp[h].icod = 150 + (nivar++);
+				return;
+				}
 			else{
-				if( lrw == 301 ){
-					var[50+nivar] = hashp[h].ptss;
-					lsymb = symbol[nsymb++] = hashp[h].icod = 150 + (nivar++);
-					return;
-				}
-				else{
-					fprintf( fpe, e4, line, t);
-					nerr++;
-					lsymb = symbol[nsymb++] = hashp[h].icod = 0;
-				}
+			fprintf( fpe, e4, line, t);
+				nerr++;
+				lsymb = symbol[nsymb++] = hashp[h].icod = 0;
 			}
 		}
 	}
@@ -1125,7 +1120,7 @@ int nextr( void )
 	int r;
 	
 	/* implemented by Miguel */
-	for( r = 0; rbu[r]; r++)
+	for( r = 0; rbu[r]; r++){}
 	
 	if( 5 < r )
 	{
@@ -1176,53 +1171,53 @@ int nexts( char *s,char *t )
 			/* I dont see this on page one anywhere Danny - Miguel */
 			/*case 0x3e3d: ch = (char)131; break; // ">=" for p8'*/
 			default:		
-				switch( (int)kind[(int)ch & 0x00ff])
+				switch( (int)kind[(int)ch & 0x00ff] )
 				{
-					case 0:	*t = EOS; 
-								 	return (-st);
+					case 0:	
+						*t = EOS; 
+						return (-st);
 
-					case 1:	if (st == 0){
-									st = 3;
-									}
-									
-									if (((ch == 'e')||(ch == 'E')) && ((st == 5) || (st==6)) 
-										&& (e==0))
-									{
-										st =6;
-										e++;
-									}
- 									
-									else
-									{
-										if (4 < st){
-											st = 4;
-										}
-									}
+					case 1:	
+					if (st == 0){
+						st = 3;
+					}
+					
+					if (((ch == 'e')||(ch == 'E')) && ((st == 5) || (st==6)) 
+						&& (e==0))
+					{
+						st = 6;
+						e++;
+					}
+						
+					else
+					{
+						if (4 < st){
+							st = 4;
+						}
+					}
 
-				 case 2: 	if (st==0)
-								 	{
-										st=5;
-									}
-									p++; 
-									*t++=ch;
- 									break;
+				 	case 2:
+				 	if (st==0){
+						st=5;
+					}
+				 	p++; 
+			     	*t++=ch;
+				 	break;
 
-				 case 3: 	if (st==0)
- 									{
-										*t++=ch;
- 										p++;
+				 	case 3: 	
+					if (st==0){
+						*t++ = ch;
+						p++;
                     //364 may need to be modified for p8'
-										if ((ch=='-')&&isdigit(*p) && ((lsymb==303)||(lsymb ==352)||(lsymb==354)||
-											((358<lsymb)&&(lsymb<364))))
-										{
-											st = 5;
-											break;
- 										}
-										else
- 										{
-											*t=EOS;
-											return (2);
-										}
+						if ((ch=='-')&&isdigit(*p) && ((lsymb==303)||(lsymb ==352)||(lsymb==354)||
+							((358<lsymb)&&(lsymb<364)))){
+								st = 5;
+								break;
+                            }
+                            else{
+                                *t=EOS;
+                                return (2);
+                            }
 									}
  									else
 									{
@@ -1303,8 +1298,8 @@ void outscan( void ) // By Devin 2/26
 	if (nerr)
 	{
 		printf("\n\n%d error%sdetected in scan\n\n",
-			   nerr, (nerr < 2 ? " " : "s "));
-		
+		nerr, (nerr < 2 ? " " : "s "));
+        fpe = fopen( "$$err$$","rt");
 		while ((c = getc( fpe )) != EOF) {
 			ouch(c);
 		}
@@ -1493,7 +1488,8 @@ void reportbug( void ) // By Devin 2/26
 		return;
 	}
 	
-	printf( "\n\n** bug at or near line %d: numbug = %d **\n\n sigma = %4d\n alpha =%4d \n\n isymb =%4d \n top =%4d\n\n c1i =%4d \n c1j =%4d \n\n", eline, bug, sigma, alpha, isymb, top, c1i, c1j );
+	printf( "\n\n** bug at or near line %d: numbug = %d **\n\n sigma = %4d\n alpha =%4d \n\n isymb =%4d \n top =%4d\n\n c1i =%4d \n c1j =%4d \n\n\n"
+	    , eline, bug, sigma, alpha, isymb, top, c1i, c1j );
 
 	if((j = top - 9) < 1)
 	{

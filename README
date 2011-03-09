@@ -24,21 +24,23 @@ DONE:
 		comp ( int s, int *p) - pg 123 by miguel
 		closeout ( void ) - pg 121/122 by miguel
 		getsymbol(); by Nick, fixed by Miguel
-
+		initparse ( void ) pg 126 - looks like the teacher is giving us this
+		hash ( char *s) - pg 100 by Miguel
+		tento (int n) - pg 113 - by Miguel
+		letterstr( char *t) - pg 104 by Miguel  
+        shift ( void ) pg 132
+		reportbug( void ) pg 131
+		nextr( void )  pg 128
+		parse() - pg 129 by miguel
+		match( void )  pg 127
+		outscan ( void ) - pg 109-111
+		reduce ( void ) - pg 130  by miguel
+		scan ( void ) - pg 112
+		makename( char *p, char *q, char *r) - pg 105 by Miguel
+		   
+		
 Functions that have been implemented but need to be double checked		
 CHECK:           
-		letterstr( char *t) - pg 104 by Miguel
-		hash ( char *s) - pg 100 by Miguel
-		makename( char *p, char *q, char *r) - pg 105 by Miguel
-		tento (int n) - pg 113 - by Miguel
-		scan ( void ) - pg 112
-		shift ( void ) pg 132
-		match( void )  pg 127
-		nextr( void )  pg 128 
-		reportbug( void ) pg 131
-		initparse ( void ) pg 126 - looks like the teacher is giving us this
-		outscan ( void ) - pg 109-111
-		parse() - pg 129 by miguel
-		reduce ( void ) - pg 130  by miguel
+	  
 		
 
