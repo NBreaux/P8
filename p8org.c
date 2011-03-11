@@ -5,6 +5,7 @@
 
 #include "p8.h"
 #include <string.h>
+#include <stdlib.h>
 
 int main( int argc,char **argv )
 {
@@ -137,7 +138,7 @@ void closeout(void)
         exit(1);
     }
     makename( fname, "asm", fasm);
-    if( fopen(fasm, "rt" != (FILE *)NULL ) ) {
+    if( fopen(fasm, "rt") != (FILE *)NULL) {
         unlink(fasm);
     }
     rename(fcode,fasm);
@@ -989,7 +990,7 @@ void initscan( void )// By Miguel - 2/16 @ 12:10 PM  added initscan function.
 
 void intstr( char *t )// By Miguel - 02/16 @04:23 am - I know im up late again :P
 {
-	long atol( char * );
+	//long atol( char * );
 
 	long x;
 	int i;
@@ -1034,9 +1035,8 @@ void letterstr( char *t )
 			nerr++;
 		}
 		if( 300 <= i)
-            lrw = i;
-			
-		 lsymb = symbol[nsymb++] = i;
+            lrw = i;  
+		lsymb = symbol[nsymb++] = i;
 	}
 	
 	else{
@@ -1063,11 +1063,10 @@ void letterstr( char *t )
 				lsymb = symbol[nsymb++] = hashp[h].icod = 150 + (nivar++);
 				return;
 				}
-			else{
+		   
 			fprintf( fpe, e4, line, t);
-				nerr++;
-				lsymb = symbol[nsymb++] = hashp[h].icod = 0;
-			}
+			nerr++;
+			lsymb = symbol[nsymb++] = hashp[h].icod = 0;
 		}
 	}
 }
@@ -1189,55 +1188,51 @@ int nexts( char *s,char *t )
             break; // "!="
 			/* I dont see this on page one anywhere Danny - Miguel */
 			/*case 0x3e3d: ch = (char)131; break; // ">=" for p8'*/
-			default:		
-				switch( (int)kind[(int)ch & 0x00ff] )
-				{
-					case 0:	
-						*t = EOS; 
-						return (-st);
+            default:;
+        }		
+        switch( (int)kind[(int)ch & 0x00ff] )
+        {
+            case 0:	
+            *t = EOS; 
+            return (-st);
 
-					case 1:	
-					if (st == 0){
-						st = 3;
-					}
+            case 1:	
+            if (st == 0){
+                st = 3;
+            }
 					
-					if (((ch == 'e')||(ch == 'E')) && ((st == 5) || (st==6)) 
-						&& (e==0))
-					{
-						st = 6;
-						e++;
-					}
-						
-					else
-					{
-						if (4 < st){
-							st = 4;
-						}
-					}
+            if (((ch == 'e')||(ch == 'E')) && ((st == 5) || (st==6)) && (e==0)){
+                st = 6;
+				e++;
+				}	
+             else {
+                 if (4 < st){
+                     st = 4;
+                 }
+             }
 
-				 	case 2:
-				 	if (st==0){
-						st=5;
-					}
-				 	p++; 
-			     	*t++=ch;
-				 	break;
+             case 2:
+             if (st==0){
+                 st=5;
+             }
+             p++; 
+             *t++=ch;
+             break;
 
-				 	case 3: 	
-					if (st==0){
-						*t++ = ch;
-						p++;
+             case 3: 	
+             if (st==0){
+                 *t++ = ch;
+                 p++;
                     //364 may need to be modified for p8'
-						if ((ch=='-')&&isdigit(*p) && ((lsymb==303)||(lsymb ==352)||(lsymb==354)||
-							((358<lsymb)&&(lsymb<364)))){
-								st = 5;
-								break;
-                            }
-                            else{
-                                *t=EOS;
-                                return (2);
-                            }
-									}
+             if ((ch=='-')&&isdigit(*p) && ((lsymb==303) || (lsymb ==352)||(lsymb==354) || ((358<lsymb)&&(lsymb<364)))){
+                 st = 5;
+                 break;
+             }
+             else{
+                 *t=EOS;
+                 return (2);
+             }
+            }
  									else
 									{
 										if(st==3)
@@ -1296,7 +1291,6 @@ int nexts( char *s,char *t )
 								}
 			  }
  		}
-  }
 }
 
 void ouch( int c )
@@ -1507,8 +1501,7 @@ void reportbug( void ) // By Devin 2/26
 		return;
 	}
 	
-	printf( "\n\n** bug at or near line %d: numbug = %d **\n\n sigma = %4d\n alpha =%4d \n\n isymb =%4d \n top =%4d\n\n c1i =%4d \n c1j =%4d \n\n\n"
-	    , eline, bug, sigma, alpha, isymb, top, c1i, c1j );
+	printf( "\n\n** bug at or near line %d: numbug = %d **\n\n sigma = %4d\n alpha =%4d \n\n isymb =%4d \n top =%4d\n\n c1i =%4d \n c1j =%4d \n\n\n", eline, bug, sigma, alpha, isymb, top, c1i, c1j );
 
 	if((j = top - 9) < 1)
 	{
@@ -1524,7 +1517,7 @@ void reportbug( void ) // By Devin 2/26
 	ouch( (int)NEWL );
 	
 	if ( isymb < nsymb ) {
-		if ((nsymb <= ( k = isymb + 9 ))) {
+		if (nsymb <= ( k = isymb + 9 )) {
 			k = nsymb - 1;
 		}
 		

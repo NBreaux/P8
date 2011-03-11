@@ -1,10 +1,6 @@
-So far included are the files P8.h and p8org.c
-
 These are all the functions that need to be implemented into the source
 TODO:      fix remaining errors/warnings
 
-error/warning list from visual studio 2008/windows on the wave*
-1>p8 debug - 16 error(s), 18 warning(s)
         
 DONE:   
 		nexts ( char *s, char *t) - pg 106-108 done by Danny checked by Miguel
@@ -41,7 +37,4 @@ DONE:
 		   
 		
 Functions that have been implemented but need to be double checked		
-CHECK:           
-	  
-		
-
+CHECK:
