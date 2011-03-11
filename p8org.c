@@ -3,7 +3,7 @@
 //	Shows organization of dan's p8.c.
 //
 
-#include "p8.h"
+#include "p8old.h"
 #include <string.h>
 #include <stdlib.h>
 
@@ -38,18 +38,18 @@ int main( int argc,char **argv )
 	return( 0 );
 }
 
-long double atold( char *a )
+double atold( char *a )
 {
-	long double tento( int );
+	double tento( int );
 
-	long double y;
+	double y;
 	int n,p,s;
-	y=(long double)0;
+	y=(double)0;
 	/* this statement is completely legal in c */
 	n = p = s = 0;
 	// Danny - I can't tell if this is a space or just supposed to be nothing '' 
 	/* Miguel - looks like a space chararecter */
-	while ((*a==' ')||(*a=='\t'))
+	while ((*a==' ')||(*a=='\t')||(*a =='\r'))
 	{
 		a++;
 	}
@@ -62,7 +62,7 @@ long double atold( char *a )
 	
 	while(isdigit(*a))
 	{
-		y=((long double)10*y+(long double)((*a++)-'0'));
+		y=((double)10*y+(double)((*a++)-'0'));
 	}
 	
 	if(*a=='.')
@@ -71,7 +71,7 @@ long double atold( char *a )
 		while(isdigit(*a))
 		{
  			p++;
- 			y=((long double)10*y+(long double)((*a++)-'0'));
+ 			y=((double)10*y+(double)((*a++)-'0'));
 		}
 	}
 	if ((*a=='e')||(*a=='E'))
@@ -215,7 +215,7 @@ void extradot( int d,char *t )
 
 void floatstr( char *t )
 {
-	long double atold( char * );
+	double atold( char * );
 
 	double x;
 	int i;
@@ -869,7 +869,7 @@ void getsymbol( void )
 	 }
 	else{
 	  	do{
-		   if (nsymb >= ++isymb){
+		   if (nsymb <= ++isymb){
 			 	eos++;
 		   	}
 		   else{ 
@@ -896,7 +896,7 @@ int hash( char *s )
 	int h,q;
 	char *p;
 	/* I cant remember but can we just leave a for loop without braces? */
-	for( p = s, q = 0; *p; q = q+(int)*p, p++){}
+    for( p = s, q = 0; *p; q = q+(int)*p, p++);
 	
 	h = ( q % HSIZE ) - 1;
 	
@@ -992,7 +992,7 @@ void intstr( char *t )// By Miguel - 02/16 @04:23 am - I know im up late again :
 {
 	//long atol( char * );
 
-	long x;
+	long int x;
 	int i;
 
 	x = atol( t );
@@ -1164,7 +1164,7 @@ int nexts( char *s,char *t )
        /* forgot this */
 		ch = *p;
 		ch2 = (((int)ch)<< 8) + ((int)*(p+1));
-		printf("-%x",ch2);
+		printf("-%x\n",ch2);
 		switch(ch2)
 		{ 
 			/* Forgot to add p++ to the cases Also it seems that NEWL is defined in p8.h */
@@ -1172,11 +1172,17 @@ int nexts( char *s,char *t )
 			ch = NEWL; 
 			break;		// "//" also we may need to define NEWL somewhere
 			
+			case 0xd0a: 
+			ch = NEWL; 
+			break;
+			
+			case 0xd: 
+			ch = NEWL; 
+			break;
+			
 			case 0x3c3d: 
 			ch = (char)128; 
-			printf("=%i",p);
 			p++; 
-			printf("=%i",p);
 			break; // "<="
 			
 			case 0x3d3d: 
@@ -1230,7 +1236,7 @@ int nexts( char *s,char *t )
 					 *t++ = ch;//sets *t to ch while simultaneously going to the next t thing
 					 p++;
 						//364 may need to be modified for p8'
-					if ((ch=='-')&& isdigit(*p) && ((lsymb==303) || (lsymb ==352)||(lsymb==354) || ((358<lsymb)&&(lsymb<364))))
+					if ((ch=='-') && isdigit(*p) && ((lsymb==303) || (lsymb ==352)||(lsymb==354) || ((358<lsymb)&&(lsymb<364))))
 					{
 						 st = 5;
 						 break;
@@ -1401,7 +1407,7 @@ void outscan( void ) // By Devin 2/26
 					j = 1;
 				}
 				
-				fprintf( fps, "%5d", k );
+			    fprintf( fps, "%5d", k );
 			}
 		}
 		
@@ -1558,13 +1564,13 @@ void scan( void )
 	while(fgets( s, MAXL+1, fps ) != (char*)NULL)
 	{
 		line++;
-		lsymb = symbol[nsymb++] = 400+line;
+		lsymb = symbol[nsymb++] = 400 + line;
 		
 		do{
 				if(( st = nexts( s,t )) != 0)
 				{
 					switch( 0 < st ? st : -st ){
-							case 1:	illegalch();
+							case 1:	//illegalch();
 							break;
 							
 							case 2: delimiter();
@@ -1625,17 +1631,17 @@ void shift( void )
 	eline = line;
 }
 
-long double tento( int n )
+double tento( int n )
 {
-	long double y,z;
+	double y,z;
 	
 	if( n < 0 ){
 		/* not sure if its an l or a 1 for now im going with one */
-		return((long double)1 / tento(-n));
+		return((double)1 / tento(-n));
 	}
 	else{
-		z = (long double)10;
-		y = (n & 1 ? z : (long double)1 );
+		z = (double)10;
+		y = (n & 1 ? z : (double)1 );
 		
 		for(; n >>= 1;){
 			z = z*z;
