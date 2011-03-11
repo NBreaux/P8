@@ -161,6 +161,7 @@ int comp( int s,int *p )
 void delimiter( void )
 {
 	lsymb = symbol[nsymb++] = 350+(int)delim[(int)ch & 0x00ff];
+
 	if( ch == ';')
 	{
 		lrw = 0;
@@ -1164,7 +1165,10 @@ int nexts( char *s,char *t )
        /* forgot this */
 		ch = *p;
 		ch2 = (((int)ch)<< 8) + ((int)*(p+1));
+<<<<<<< HEAD
 		printf("-%x\n",ch2);
+=======
+>>>>>>> 7c0072ba3bbeeff6fd8837b7fee4cac6a9b0fca5
 		switch(ch2)
 		{ 
 			/* Forgot to add p++ to the cases Also it seems that NEWL is defined in p8.h */
