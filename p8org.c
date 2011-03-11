@@ -1571,7 +1571,7 @@ void scan( void )
 				if(( st = nexts( s,t )) != 0)
 				{
 					switch( 0 < st ? st : -st ){
-							case 1:	//illegalch();
+							case 1:	illegalch();
 							break;
 							
 							case 2: delimiter();
