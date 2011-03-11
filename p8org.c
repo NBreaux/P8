@@ -38,13 +38,13 @@ int main( int argc,char **argv )
 	return( 0 );
 }
 
-double atold( char *a )
+long double atold( char *a )
 {
-    double tento( int );
+	long double tento( int );
 
-    double y;
+	long double y;
 	int n,p,s;
-	y=(double)0;
+	y=(long double)0;
 	/* this statement is completely legal in c */
 	n = p = s = 0;
 	// Danny - I can't tell if this is a space or just supposed to be nothing '' 
@@ -62,7 +62,7 @@ double atold( char *a )
 	
 	while(isdigit(*a))
 	{
-		y=((double)10*y+(double)((*a++)-'0'));
+		y=((long double)10*y+(long double)((*a++)-'0'));
 	}
 	
 	if(*a=='.')
@@ -71,7 +71,7 @@ double atold( char *a )
 		while(isdigit(*a))
 		{
  			p++;
- 			y=((double)10*y+(double)((*a++)-'0'));
+ 			y=((long double)10*y+(long double)((*a++)-'0'));
 		}
 	}
 	if ((*a=='e')||(*a=='E'))
@@ -107,7 +107,7 @@ void closeout(void)
     }
     for( i=0; i < nilit; i++){
 
-        fprintf( fpc,"c%.2d\tdd\t%d\n", 50+i, ilit[i] );
+        fprintf( fpc,"c%.2d\tdd\t%ld\n", 50+i, ilit[i] );
     }
 
     for( i=0; i < nrvar; i++){
@@ -215,7 +215,7 @@ void extradot( int d,char *t )
 
 void floatstr( char *t )
 {
-	double atold( char * );
+	long double atold( char * );
 
 	double x;
 	int i;
@@ -1164,7 +1164,7 @@ int nexts( char *s,char *t )
        /* forgot this */
 		ch = *p;
 		ch2 = (((int)ch)<< 8) + ((int)*(p+1));
-
+		printf("-%x",ch2);
 		switch(ch2)
 		{ 
 			/* Forgot to add p++ to the cases Also it seems that NEWL is defined in p8.h */
@@ -1174,7 +1174,9 @@ int nexts( char *s,char *t )
 			
 			case 0x3c3d: 
 			ch = (char)128; 
+			printf("=%i",p);
 			p++; 
+			printf("=%i",p);
 			break; // "<="
 			
 			case 0x3d3d: 
@@ -1190,7 +1192,6 @@ int nexts( char *s,char *t )
 			/*case 0x3e3d: ch = (char)131; break; // ">=" for p8'*/
             default:;
         }		
-        
         switch( (int)kind[(int)ch & 0x00ff] )
         {
             case 0:	
@@ -1198,89 +1199,106 @@ int nexts( char *s,char *t )
             return (-st);
 
             case 1:	
-            if (st == 0){
-                st = 3;
-            }
+				if (st == 0)
+				{
+					st = 3;
+				}
 					
-            if (((ch == 'e')||(ch == 'E')) && ((st == 5) || (st==6)) && (e==0)){
-                st = 6;
-				e++;
-				}	
-             else {
-                 if (4 < st){
-                     st = 4;
-                 }
-             }
+				if (((ch == 'e')||(ch == 'E')) && ((st == 5) || (st==6)) && (e==0)){
+					 st = 6;
+					 e++;
+					 }	
+				 else {
+					 if (4 < st)
+					 {
+						 st = 4;
+					 }
+				 }
 
              case 2:
-             if (st==0){
-                 st=5;
-             }
-             p++; 
-             *t++=ch;
-             break;
+				 if (st==0){
+					 st=5;
+				 }
+				 p++; 
+				 *t++=ch;
+				 break;
 
-             case 3: 	
-             if (st == 0){
-                 *t++ = ch;
-                 p++;
-                    //364 may need to be modified for p8'
-                 if ((ch=='-')&&isdigit(*p) && ((lsymb==303) || (lsymb ==352)||(lsymb==354) || ((358<lsymb)&&(lsymb<364)))){
-                     st = 5;
-                     break;
-                 }
-                 else{
-                     *t=EOS;
-                     return (2);
-                 }
-            }
-            else{
-                if(st==3){
-                    *t=EOS;
-                    return(3);
-                }
-                else{
-                    if((ch=='-')&&((*(t-1)=='e')||(*(t-1)=='E'))){
-                        p++;
-                        *t++=ch;
-                        break;
-                    }
-                    else{
-                        if(ch=='.'){
-                            *t++=ch;
-                            p++;
+			case 3: 	
+
+				if (st==0)
+				 {
+					 *t++ = ch;//sets *t to ch while simultaneously going to the next t thing
+					 p++;
+						//364 may need to be modified for p8'
+					if ((ch=='-')&& isdigit(*p) && ((lsymb==303) || (lsymb ==352)||(lsymb==354) || ((358<lsymb)&&(lsymb<364))))
+					{
+						 st = 5;
+						 break;
+					}
+					else
+					{
+						*t=EOS;
+						 return (2);
+					}
+				 }
+ 				else
+				{
+					if(st==3)
+					{
+						*t=EOS;
+						return(3);
+					}
+					else
+ 					{
+						if((ch=='-')&&((*(t-1)=='e')||(*(t-1)=='E')))
+						{
+							p++;
+							*t++=ch;
+							break;
+						}
+						else
+						{
+ 							if(ch=='.')
+							{
+								*t++=ch;
+								p++;
 													
-                            if(4 < st){
-                                st++;
-                            }
-                            break;
-                        }
-                        else{
-                            *t=EOS;
-                            return (st);
-                            }
-                        }
-                    }
-                }
-				 case 4:
-                 p++;
-                 if(st){
-                     *t=EOS;
-                     return(st);
-                 }
-                 else
-                     break;
-				 case 5:
-                 if (st == 0){
-                     p++;
-                     return(1);
-                 }
-                 else{
-                     *t=EOS;
-                     return(st);
-                 }
-             }
-       } 
+								if(4 < st)
+								{
+									st++;
+								}
+								break;
+							}
+							else
+							{
+								*t=EOS;
+								return (st);
+							}
+						}
+					}
+				}
+			case 4:
+ 						p++;
+						if(st)
+						{
+							*t=EOS;
+							return(st);
+						}
+						else
+							break;
+			case 5:
+						if (st == 0)
+						{
+							p++;
+							return(1);
+						}
+						else
+						{
+ 							*t=EOS;
+							return(st);
+						}
+			  }
+ 		}
 }
 
 void ouch( int c )
@@ -1348,7 +1366,7 @@ void outscan( void ) // By Devin 2/26
 		if (nilit) {
 			fputs( "\n\ninteger literals\n\n", fps );
 			for ( i = 0; i < nilit; i++ ) {
-				fprintf( fps, "%6d%15d\n",
+				fprintf( fps, "%6d%15ld\n",
 						250 + i, ilit[i] );
 			}
 		}
@@ -1607,17 +1625,17 @@ void shift( void )
 	eline = line;
 }
 
-double tento( int n )
+long double tento( int n )
 {
-	double y,z;
+	long double y,z;
 	
 	if( n < 0 ){
 		/* not sure if its an l or a 1 for now im going with one */
-		return((double)1 / tento(-n));
+		return((long double)1 / tento(-n));
 	}
 	else{
-		z = (double)10;
-		y = (n & 1 ? z : (double)1 );
+		z = (long double)10;
+		y = (n & 1 ? z : (long double)1 );
 		
 		for(; n >>= 1;){
 			z = z*z;
