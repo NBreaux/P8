@@ -3,7 +3,7 @@
 //	Shows organization of dan's p8.c.
 //
 
-#include "p8old.h"
+#include "p8.h"
 #include <string.h>
 #include <stdlib.h>
 
@@ -107,7 +107,7 @@ void closeout(void)
     }
     for( i=0; i < nilit; i++){
 
-        fprintf( fpc,"c%.2d\tdd\t%ld\n", 50+i, ilit[i] );
+        fprintf( fpc,"c%.2d\tdd\t%i\n", 50+i, ilit[i] );
     }
 
     for( i=0; i < nrvar; i++){
@@ -116,7 +116,7 @@ void closeout(void)
     }
     for( i=0; i < nivar; i++){
 
-        fprintf( fpc,"v%.2d\tdd\t?\t;%-s\n", 50+i, var[50+i] );
+        fprintf( fpc,"v%.2d\tdd\t0\t;%-s\n", 50+i, var[50+i] );
     }
 
     if( inf ){
@@ -200,7 +200,7 @@ void emit2( int i,int j )
 void emit3( int i,int j,int k )
 {
 	void emit0( int );
-	
+    fprintf(fpc,"\t%s\t",inst[i]);
 	emit0(j);
 	fputs ( ",", fpc);
 	emit0 ( k );
@@ -1164,14 +1164,22 @@ int nexts( char *s,char *t )
 	{
        /* forgot this */
 		ch = *p;
-		ch2 = (((int)ch)<< 8) + ((int)*(p+1));
-		printf("-%x\n",ch2);
+		ch2 = (((int)ch)<< 8) + ((int)*(p+1)); 
+		printf("-%x-\n",ch2);
 		switch(ch2)
 		{ 
 			/* Forgot to add p++ to the cases Also it seems that NEWL is defined in p8.h */
 			case 0x2f2f: 
 			ch = NEWL; 
 			break;		// "//" also we may need to define NEWL somewhere
+			
+			case 0xa00: //FOR Mac computers handles weird issues with carriage returns and newlines...
+			ch = NEWL; 
+			break;
+			
+			case 0xa: 
+			ch = NEWL; 
+			break;
 			
 			case 0xd0a: 
 			ch = NEWL; 
@@ -1373,7 +1381,7 @@ void outscan( void ) // By Devin 2/26
 		if (nilit) {
 			fputs( "\n\ninteger literals\n\n", fps );
 			for ( i = 0; i < nilit; i++ ) {
-				fprintf( fps, "%6d%15ld\n",
+				fprintf( fps, "%6d%15i\n",
 						250 + i, ilit[i] );
 			}
 		}
