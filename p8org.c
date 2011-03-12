@@ -1204,7 +1204,10 @@ int nexts( char *s,char *t )
             p++; 
             break; // "!="
 			/* I dont see this on page one anywhere Danny - Miguel */
-			/*case 0x3e3d: ch = (char)131; break; // ">=" for p8'*/
+			case 0x3e3d: 
+			ch = (char)131; 
+			break; // ">=" for p8'*/
+            
             default:;
         }		
         switch( (int)kind[(int)ch & 0x00ff] )
