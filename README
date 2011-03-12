@@ -1,5 +1,9 @@
-These are all the functions that need to be implemented into the source
-TODO:      fix remaining errors/warnings
+
+TODO:
+		For P8 prime we need to edit the header file and add 2 extra parts to c2 table and new sigma table
+		and i think thats it. Me and Nick added 2 columns and 2 rows to c1 for < and <=. We haven't touched 
+		c2 or newsigma yet or comi table comf not sure what needs to be done  there.
+		did add the code for greater then equal in nexts so thats there. - Miguel
 
         
 DONE:   
@@ -34,7 +38,3 @@ DONE:
 		reduce ( void ) - pg 130  by miguel
 		scan ( void ) - pg 112
 		makename( char *p, char *q, char *r) - pg 105 by Miguel
-		   
-		
-Functions that have been implemented but need to be double checked		
-CHECK:
