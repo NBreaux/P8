@@ -3,7 +3,7 @@
 //	Shows organization of dan's p8.c.
 //
 
-#include "p8.h"
+#include "p8test.h"
 #include <string.h>
 #include <stdlib.h>
 
@@ -855,9 +855,15 @@ void gencode( void )
 		case 49:
 		case 50:
 		case 51:
-		case 52: //I think we needed these here.
-		case 53:// I think we needed these here.
-		case 54: OP0 = (int)(modes == 1 ? comi[row-49] : comf[row-49]);
+		case 52:
+		case 53:
+		case 54:
+		    if(row == 54){ //added test case for JGE 
+		        OP0 = (int)(modes == 1 ? comi[row-51] : comf[row-49]);
+		    }
+		    else{
+		        OP0 = (int)(modes == 1 ? comi[row-49] : comf[row-49]);
+	        }
 			break;
 		default: printf( "** bad row [%d] in gencode **\n",row );
 			exit( 1 );
@@ -1207,7 +1213,8 @@ int nexts( char *s,char *t )
             break; // "!="
 			/* I dont see this on page one anywhere Danny - Miguel */
 			case 0x3e3d: 
-			ch = (char)131; 
+			ch = (char)131;
+            p++; 
 			break; // ">=" for p8'*/
             
             default:;
