@@ -855,7 +855,9 @@ void gencode( void )
 		case 49:
 		case 50:
 		case 51:
-		case 52: OP0 = (int)(modes == 1 ? comi[row-49] : comf[row-49]);
+		case 52: //I think we needed these here.
+		case 53:// I think we needed these here.
+		case 54: OP0 = (int)(modes == 1 ? comi[row-49] : comf[row-49]);
 			break;
 		default: printf( "** bad row [%d] in gencode **\n",row );
 			exit( 1 );
@@ -1098,7 +1100,7 @@ void match( void )
 	}
 	
 	symbol[top] = sigma = newsigma[row] + 400;
-	c1i = newsigma[row] + 27;
+	c1i = newsigma[row] + 29;
 	
 	if( row == 0)
 	{
@@ -1248,7 +1250,7 @@ int nexts( char *s,char *t )
 					 *t++ = ch;//sets *t to ch while simultaneously going to the next t thing
 					 p++;
 						//364 may need to be modified for p8'
-					if ((ch=='-') && isdigit(*p) && ((lsymb==303) || (lsymb ==352)||(lsymb==354) || ((358<lsymb)&&(lsymb<364))))
+					if ((ch=='-') && isdigit(*p) && ((lsymb==303) || (lsymb ==352)||(lsymb==354) || ((358<lsymb)&&(lsymb<366))))
 					{
 						 st = 5;
 						 break;
