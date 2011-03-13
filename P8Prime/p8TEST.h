@@ -1,4 +1,3 @@
-
 //	p8.h		1996 sep 12	last modified 2000 may 17
 //
 
@@ -141,7 +140,7 @@
 			  1,0,1,1,1,0,1,1,0,0, 0,0,0,1,1,1,1,0,0,0,
 			  0,1,0,0,0,0,0,0,0,1, 1,1,1,0},
 		comf[4]={ 7, 8, 9,13},
-		comi[4]={10,11, 9,13},
+		comi[6]={10,11,41,42,9,13},
 		delim[132]={0,0,0,0,0,0,0,0,0,0,0, 0,  0,0,0,0, //changed the array size to 132 add onto end
 			    0,0,0,0,0,0,0,0,0,0,0, 0, 0,0, 0,0,
 			    0,0,0,0,0,0,0,0,2,3,7, 5,13,6, 0,8,
@@ -163,14 +162,15 @@
 			    0,35,22,26},
 		*fcode="$$p8$$.asm",
 		*fname,inf,ini,
-		*inst[41]={"add" ,"call","cdq" ,"cmp" ,"cwd" ,"idiv",
+		*inst[43]={"add" ,"call","cdq" ,"cmp" ,"cwd" ,"idiv",
 			   "imul","ja"  ,"jae" ,"je"  ,"jl"  ,"jle" ,
 			   "jmp" ,"jne" ,"mov" ,"neg" ,"pop" ,"push",
 			   "sahf","sub" ,"xchg",
 			   "fadd"  ,"faddp","fchs" ,"fcom"  ,"fcomp"    ,
 			   "fcompp","fdiv" ,"fdivp","fdivr" ,"fdivrp"   ,
 			   "fld"   ,"fmul" ,"fmulp","fstp"  ,"fstsw\tax",
-			   "fsub"  ,"fsubp","fsubr","fsubrp","fxch"},  
+			   "fsub"  ,"fsubp","fsubr","fsubrp","fxch",
+			   "jg","jge"},    
 		kind[132]={5,5,5,5,5,5,5,5,5,4,0,5,5,5,5,5, //changed to 132 to allow for >=
 			       5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
 			       4,5,5,5,5,5,5,5,3,3,3,3,3,3,3,3,
