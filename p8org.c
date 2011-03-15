@@ -1165,7 +1165,6 @@ int nexts( char *s,char *t )
        /* forgot this */
 		ch = *p;
 		ch2 = (((int)ch)<< 8) + ((int)*(p+1)); 
-		printf("-%x-\n",ch2);
 		switch(ch2)
 		{ 
 			/* Forgot to add p++ to the cases Also it seems that NEWL is defined in p8.h */
